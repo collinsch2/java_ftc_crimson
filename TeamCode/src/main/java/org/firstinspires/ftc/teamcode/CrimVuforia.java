@@ -21,7 +21,6 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 
-@SuppressWarnings("unused")
 @Autonomous(name = "Vuforia")
 public class CrimVuforia extends LinearOpMode
 {
@@ -42,13 +41,8 @@ public class CrimVuforia extends LinearOpMode
     private float robotAngle = 0;
     Robot robot = new Robot();
 
-
-
     public void runOpMode() throws InterruptedException
     {
-
-        // We don't know where the robot is, so set it to the origin
-        // If we don't include this, it would be null, which would cause errors later on
         lastKnownLocation = createMatrix(0, 0, 0, 0, 0, 0);
 
         waitForStart();
