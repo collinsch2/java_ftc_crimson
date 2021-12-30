@@ -30,12 +30,11 @@ public class CrimsonTeleop extends OpMode {
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         actuatorMotor = hardwareMap.get(DcMotor.class, "actuatorMotor");
-        armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
         carouselServo = hardwareMap.get(CRServo.class, "WheelServo");
         leftClaw = hardwareMap.get(CRServo.class, "leftClaw");
         rightClaw = hardwareMap.get(CRServo.class, "rightClaw");
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
-
+        armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
@@ -56,56 +55,41 @@ public class CrimsonTeleop extends OpMode {
 
         //Raise and lower the arm
         double armPower = -1.0;
-        /*if (gamepad1.dpad_up) {
-            armMotor.setPower(armPower);
-        } else {
-         //   armMotor.setPower(0.3);
-        }
 
-        if (gamepad1.dpad_down) {
-            armMotor.setPower(-armPower);
-        } else {
-            //armMotor.setPower(0);
-        } */
 
-        int shippingHeights[] = {0, 200, 300, 400};
-        armMotor.setTargetPosition(shippingHeights[0]);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         double armVelocity = 200;
-        int x = 0;
-        if (gamepad1.dpad_up) {
-            x++;
-            armMotor.setTargetPosition(shippingHeights[x]);
+        if (gamepad2.y) {
+            armMotor.setTargetPosition(200);
             armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
                 telemetry.addData("Status", "Waiting for motor");
+                telemetry.addData("Motor at", armMotor.getCurrentPosition());
                 telemetry.update();
             }
         }
-        if (gamepad1.dpad_down) {
-            x--;
-            armMotor.setTargetPosition(shippingHeights[x]);
-            armMotor.setVelocity(-armVelocity);
+
+        if (gamepad2.b) {
+            armMotor.setTargetPosition(300);
+            armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
+                telemetry.addData("Motor at", armMotor.getCurrentPosition());
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.update();
             }
         }
 
+        if (gamepad2.a) {
+            armMotor.setTargetPosition(400);
+            armMotor.setVelocity(armVelocity);
+            while(armMotor.isBusy()) {
+                telemetry.addData("Motor at", armMotor.getCurrentPosition());
+                telemetry.addData("Status", "Waiting for motor");
+                telemetry.update();
+            }
+        }
         //rotate the carousel
         double carouselRotation = 0.25; //needs to be low bc motor moves faster than servo
-        /* if (gamepad1.x) {  //servo
-            sleep(100);
-            carouselServo.setPower(carouselRotation);
-            telemetry.addData("Servo moving clockwise", "true");
-            telemetry.update();
-        }
-        if (gamepad1.y) {
-            sleep(100);
-            carouselServo.setPower(-carouselRotation);
-            telemetry.addData("Servo moving counter-clockwise", "true");
-            telemetry.update();
-        } */
 
         if (gamepad1.x) {  //motor
             sleep(100);
