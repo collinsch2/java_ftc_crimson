@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import static android.os.SystemClock.sleep;
 
-@TeleOp
+@TeleOp(name="CrimsonTeleop")
 public class CrimsonTeleop extends OpMode {
 
     DcMotor frontLeft;
@@ -54,10 +54,8 @@ public class CrimsonTeleop extends OpMode {
         backRight.setPower((yPower + xPower - rx) * 0.75);
 
         //Raise and lower the arm
-        double armPower = -1.0;
 
-
-        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         double armVelocity = 200;
         if (gamepad2.y) {
             armMotor.setTargetPosition(200);
@@ -146,5 +144,10 @@ public class CrimsonTeleop extends OpMode {
             telemetry.addData("Linear actuator is stopped", "true");
             telemetry.update();
         }
+        /*
+        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        double armPosition = gamepad2.left_stick_y;
+        armMotor.setTargetPosition((int) (armPosition * 500));
+        */
     }
 }
