@@ -67,12 +67,6 @@ public class Robot {
         backRight.setPower(0);
     }
 
-    public void move(double xAxis, double yAxis, double pivotTurn) {
-        frontLeft.setPower(yAxis + xAxis + pivotTurn);
-        frontRight.setPower(yAxis -xAxis -pivotTurn);
-        backLeft.setPower(yAxis -xAxis + pivotTurn);
-        backRight.setPower(yAxis + xAxis - pivotTurn);
-    }
 
     public void moveCarousel() {
         carouselMotor.setPower(1);

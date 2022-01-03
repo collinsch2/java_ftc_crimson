@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous(name = "BWH")
-public class AutoBlueWH extends LinearOpMode {
+public class AutoRedWH extends LinearOpMode {
     Robot robot = new Robot();
     RobotEncoded encodedMotors = new RobotEncoded();
 
@@ -17,7 +17,7 @@ public class AutoBlueWH extends LinearOpMode {
         //move to carousel
         encodedMotors.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encodedMotors.frontRight.setTargetPosition(500); //?
-        encodedMotors.strafe(100);
+        encodedMotors.strafe(-100);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
@@ -25,8 +25,8 @@ public class AutoBlueWH extends LinearOpMode {
 
         //turn to position servo at carousel
         encodedMotors.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encodedMotors.frontRight.setTargetPosition(200); //?
-        encodedMotors.turnRight(100);
+        encodedMotors.frontRight.setTargetPosition(-200); //?
+        encodedMotors.turnLeft(100);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
@@ -45,7 +45,7 @@ public class AutoBlueWH extends LinearOpMode {
             telemetry.update();
         }
         encodedMotors.frontRight.setTargetPosition(200);
-        encodedMotors.strafe(100);
+        encodedMotors.strafe(-100);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();

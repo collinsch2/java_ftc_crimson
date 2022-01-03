@@ -39,6 +39,5 @@ public class AutoBlueCarousel extends LinearOpMode {
         robot.forward(0.7);
         sleep(10000);
 
-
     }
 }
