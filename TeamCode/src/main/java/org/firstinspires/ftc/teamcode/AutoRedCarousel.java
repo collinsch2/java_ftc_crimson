@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
@@ -14,8 +15,13 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 
 @Autonomous(name = "TestRC")
-public class AutoRedCarousel  {
+public class AutoRedCarousel extends LinearOpMode {
     Robot robot = new Robot();
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+    }
     //final TFObjectDetector myTfod;
     //final
    /* private void initVuforia(){

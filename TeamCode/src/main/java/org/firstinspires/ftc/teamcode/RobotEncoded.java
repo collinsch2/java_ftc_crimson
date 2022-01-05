@@ -20,7 +20,7 @@ public class RobotEncoded {
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
-        carouselMotor = hardwareMap.get(DcMotor.class, "WheelServo");
+        carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }

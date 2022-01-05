@@ -12,7 +12,7 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 
 //This class is used to determine encoder values and is NOT a usuable OpMode
 @TeleOp(name="Encoder Values")
-public class EncoderValues {
+public class EncoderValues extends OpMode {
 
     DcMotor frontRight;
     DcMotorEx armMotor;
@@ -24,7 +24,7 @@ public class EncoderValues {
 
     public void loop() {
         telemetry.addData("Mecanum encoder value", frontRight.getCurrentPosition());
-        //telemetry.addData("Arm Motor encoder value", armMotor.getCurrentPosition());
+        telemetry.addData("Arm Motor encoder value", armMotor.getCurrentPosition());
         telemetry.update();
 
         if (gamepad1.a) {

@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import static android.os.SystemClock.sleep;
 
 @TeleOp(name="CrimsonTeleop")
@@ -30,7 +29,6 @@ public class CrimsonTeleop extends OpMode {
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         actuatorMotor = hardwareMap.get(DcMotor.class, "actuatorMotor");
-        carouselServo = hardwareMap.get(CRServo.class, "WheelServo");
         leftClaw = hardwareMap.get(CRServo.class, "leftClaw");
         rightClaw = hardwareMap.get(CRServo.class, "rightClaw");
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
@@ -54,11 +52,10 @@ public class CrimsonTeleop extends OpMode {
         backRight.setPower((yPower + xPower - rx) * 0.75);
 
         //Raise and lower the arm
-
-        armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         double armVelocity = 200;
-        if (gamepad2.y) {
-            armMotor.setTargetPosition(200);
+        if (gamepad2.a) {
+            armMotor.setTargetPosition(-37);
+            armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
                 telemetry.addData("Status", "Waiting for motor");
@@ -68,7 +65,8 @@ public class CrimsonTeleop extends OpMode {
         }
 
         if (gamepad2.b) {
-            armMotor.setTargetPosition(300);
+            armMotor.setTargetPosition(-85);
+            armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
                 telemetry.addData("Motor at", armMotor.getCurrentPosition());
@@ -77,8 +75,9 @@ public class CrimsonTeleop extends OpMode {
             }
         }
 
-        if (gamepad2.a) {
-            armMotor.setTargetPosition(400);
+        if (gamepad2.y) {
+            armMotor.setTargetPosition(-145);
+            armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
                 telemetry.addData("Motor at", armMotor.getCurrentPosition());
@@ -87,7 +86,7 @@ public class CrimsonTeleop extends OpMode {
             }
         }
         //rotate the carousel
-        double carouselRotation = 0.25; //needs to be low bc motor moves faster than servo
+        double carouselRotation = 0.4; //needs to be low bc motor moves faster than servo
 
         if (gamepad1.x) {  //motor
             sleep(100);
@@ -109,31 +108,30 @@ public class CrimsonTeleop extends OpMode {
         }
 
         //Claw movement
-        double neutralPosition = 0.0;
         double clawRotation = 0.2;
         if (gamepad2.right_trigger >= 0.3) {
-            leftClaw.setPower(clawRotation);
-            rightClaw.setPower(-clawRotation);
+            leftClaw.setPower(-clawRotation);
+            rightClaw.setPower(clawRotation);
             telemetry.addData("Claws are moving inward", "true");
             telemetry.update();
         }
 
         if (gamepad2.left_trigger >= 0.3) {
-            leftClaw.setPower(-clawRotation);
-            rightClaw.setPower(clawRotation);
+            leftClaw.setPower(clawRotation);
+            rightClaw.setPower(-clawRotation);
             telemetry.addData("Claws are moving outward", "true");
             telemetry.update();
         }
 
         //Extend and retracting linear actuators
         double actuatorPower = 1.0;
-        if (gamepad2.dpad_up) {
+        if (gamepad2.dpad_down) {
             actuatorMotor.setPower(actuatorPower);
             telemetry.addData("Linear actuator is extending", "true");
             telemetry.update();
         }
 
-        if (gamepad2.dpad_down) {
+        if (gamepad2.dpad_up) {
             actuatorMotor.setPower(-actuatorPower);
             telemetry.addData("Linear actuator is retracting", "true");
             telemetry.update();
