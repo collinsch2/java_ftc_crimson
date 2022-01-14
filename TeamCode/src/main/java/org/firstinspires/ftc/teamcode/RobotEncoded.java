@@ -26,26 +26,26 @@ public class RobotEncoded {
 
     public void strafe (int velocity){
         frontLeft.setVelocity(velocity);
-        frontRight.setVelocity(-velocity);
+        frontRight.setVelocity(-4*velocity);
         backLeft.setVelocity(-velocity);
         backRight.setVelocity(velocity);
     }
 
-    public void forward(double velocity) {
+    public void forward(int velocity) {
         frontLeft.setPower(velocity);
         frontRight.setPower(velocity);
         backLeft.setPower(velocity);
         backRight.setPower(velocity);
     }
 
-    public void turnRight(double velocity) {
+    public void turnRight(int velocity) {
         frontLeft.setPower(-velocity);
         frontRight.setPower(velocity);
         backLeft.setPower(-velocity);
         backRight.setPower(velocity);
     }
 
-    public void turnLeft(double velocity) {
+    public void turnLeft(int velocity) {
         frontLeft.setPower(velocity);
         frontRight.setPower(-velocity);
         backLeft.setPower(velocity);

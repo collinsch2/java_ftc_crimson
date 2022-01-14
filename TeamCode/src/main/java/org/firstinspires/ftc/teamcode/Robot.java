@@ -25,7 +25,7 @@ public class Robot {
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         actuatorMotor = hardwareMap.get(DcMotor.class, "actuatorMotor");
         armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
-        carouselMotor = hardwareMap.get(DcMotor.class, "WheelServo");
+        carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         leftClaw = hardwareMap.get(CRServo.class, "leftClaw");
         rightClaw = hardwareMap.get(CRServo.class, "rightClaw");
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);

@@ -15,11 +15,12 @@ public class AutoBlueWH extends LinearOpMode {
         waitForStart();
         encodedMotors.hardwareMap(hardwareMap);
 
+
         //move to carousel
         encodedMotors.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encodedMotors.frontRight.setTargetPosition(500); //?
+        encodedMotors.frontRight.setTargetPosition(2500); //?
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        encodedMotors.strafe(100);
+        encodedMotors.strafe(300);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
@@ -27,9 +28,9 @@ public class AutoBlueWH extends LinearOpMode {
 
         //turn to position servo at carousel
         encodedMotors.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encodedMotors.frontRight.setTargetPosition(200); //?
+        encodedMotors.frontRight.setTargetPosition(-1140); //?
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        encodedMotors.turnRight(100);
+        encodedMotors.turnRight(300);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
@@ -37,27 +38,27 @@ public class AutoBlueWH extends LinearOpMode {
 
         //move carousel servo
         encodedMotors.moveCarousel(0.5);
-        sleep(2000); //?
+        sleep(5000); //?
 
         //move to warehouse and park
         encodedMotors.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encodedMotors.frontRight.setTargetPosition(500);
+        encodedMotors.frontRight.setTargetPosition(-2650);
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         encodedMotors.forward(100);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
         }
-        encodedMotors.frontRight.setTargetPosition(200);
+        encodedMotors.frontRight.setTargetPosition(780);
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        encodedMotors.strafe(100);
+        encodedMotors.strafe(300);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
         }
-        encodedMotors.frontRight.setTargetPosition(300);
+        encodedMotors.frontRight.setTargetPosition(400);
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        encodedMotors.forward(100);
+        encodedMotors.forward(500);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
