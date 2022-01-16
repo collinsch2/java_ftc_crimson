@@ -18,9 +18,9 @@ public class AutoBlueWH extends LinearOpMode {
 
         //move to carousel
         encodedMotors.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encodedMotors.frontRight.setTargetPosition(2500); //?
+        encodedMotors.frontRight.setTargetPosition(2500);
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        encodedMotors.strafe(300);
+        encodedMotors.strafe(100);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();

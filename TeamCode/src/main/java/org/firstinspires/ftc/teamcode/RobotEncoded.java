@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import static android.os.SystemClock.sleep;
+
 
 public class RobotEncoded {
 
@@ -20,16 +22,23 @@ public class RobotEncoded {
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void strafe (int velocity){
+    /*public void strafe (int velocity){
         frontLeft.setVelocity(velocity);
         frontRight.setVelocity(-4*velocity);
         backLeft.setVelocity(-velocity);
         backRight.setVelocity(velocity);
+    }*/
+
+    public void strafe (int velocity){
+        frontRight.setVelocity(velocity);
+        sleep(100);
+        frontLeft.setVelocity(frontRight.getPower());
+        backLeft.setVelocity(-frontRight.getPower());
+        backRight.setVelocity(-frontRight.getPower());
     }
+
 
     public void forward(int velocity) {
         frontLeft.setPower(velocity);
@@ -53,10 +62,10 @@ public class RobotEncoded {
     }
 
     public void stop () {
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
-        backLeft.setPower(0);
-        backRight.setPower(0);
+        frontLeft.setVelocity(0);
+        frontRight.setVelocity(0);
+        backLeft.setVelocity(0);
+        backRight.setVelocity(0);
     }
 
     public void moveCarousel(double power) {
