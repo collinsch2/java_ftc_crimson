@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Robot {
 
     DcMotor frontLeft;
-    DcMotor frontRight;
+    DcMotorEx frontRight;
     DcMotor backLeft;
     DcMotor backRight;
     DcMotor actuatorMotor;
@@ -20,7 +20,7 @@ public class Robot {
 
     public void hardwareMap(HardwareMap hardwareMap){
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         actuatorMotor = hardwareMap.get(DcMotor.class, "actuatorMotor");
@@ -68,8 +68,8 @@ public class Robot {
     }
 
 
-    public void moveCarousel() {
-        carouselMotor.setPower(1);
+    public void moveCarousel(double power) {
+        carouselMotor.setPower(power);
     }
 
 }
