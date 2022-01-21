@@ -15,6 +15,8 @@ public class RobotEncoded {
     DcMotorEx backLeft;
     DcMotorEx backRight;
     DcMotor carouselMotor;
+    DcMotorEx intakeArm;
+
 
     public void hardwareMap(HardwareMap hardwareMap){
         frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
@@ -22,6 +24,8 @@ public class RobotEncoded {
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
+        intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
+        intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     /*public void strafe (int velocity){
@@ -41,17 +45,17 @@ public class RobotEncoded {
 
 
     public void forward(int velocity) {
-        frontLeft.setPower(velocity);
-        frontRight.setPower(velocity);
-        backLeft.setPower(velocity);
-        backRight.setPower(velocity);
+        frontLeft.setVelocity(velocity);
+        frontRight.setVelocity(velocity);
+        backLeft.setVelocity(velocity);
+        backRight.setVelocity(velocity);
     }
 
     public void turnRight(int velocity) {
-        frontLeft.setPower(-velocity);
-        frontRight.setPower(velocity);
-        backLeft.setPower(-velocity);
-        backRight.setPower(velocity);
+        frontLeft.setVelocity(-velocity);
+        frontRight.setVelocity(velocity);
+        backLeft.setVelocity(-velocity);
+        backRight.setVelocity(velocity);
     }
 
     public void turnLeft(int velocity) {
