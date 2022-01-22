@@ -17,30 +17,30 @@ public class AutoRedCarousel extends LinearOpMode {
 
     @Override
     public void runOpMode() throws NullPointerException {
+        encoders.hardwareMap(hardwareMap);
         waitForStart();
-        robot.hardwareMap(hardwareMap);
 
         encoders.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encoders.frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encoders.backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encoders.backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        encoders.frontRight.setTargetPosition(1000);
-        encoders.frontLeft.setTargetPosition(1000);
-        encoders.backLeft.setTargetPosition(1000);
-        encoders.backRight.setTargetPosition(1000);
+        encoders.frontRight.setTargetPosition(10000);
+        encoders.frontLeft.setTargetPosition(10000);
+        encoders.backLeft.setTargetPosition(10000);
+        encoders.backRight.setTargetPosition(10000);
 
         encoders.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         encoders.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         encoders.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         encoders.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        encoders.forward(100);
+        encoders.frontRight.setPower(0.5);
+        encoders.frontLeft.setPower(0.5);
+        encoders.backLeft.setPower(0.5);
+        encoders.backRight.setPower(0.5);
 
-        telemetry.addData("Front Left is",  encoders.frontLeft.getDirection());
-        telemetry.addData("Back Right is", encoders.backRight.getDirection());
-        telemetry.addData("Back Left is", encoders.backLeft.getDirection());
-        telemetry.addData("Front Right is", encoders.frontRight.getDirection());
+        telemetry.addData("Path", "Completed");
         }
 
     }
