@@ -11,12 +11,15 @@ public class AutoBlueWH extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        robot.hardwareMap(hardwareMap);
+
         waitForStart();
+
         robot.hardwareMap(hardwareMap);
 
         //move to carousel
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.strafe(0.5);
+        robot.strafeRight(0.5);
         while (robot.frontRight.getCurrentPosition() <2500) {
             telemetry.addData("Robot is strafing", "True");
             telemetry.update();
@@ -47,7 +50,7 @@ public class AutoBlueWH extends LinearOpMode {
         robot.stop();
 
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.strafe(0.5);
+        robot.strafeRight(0.5);
         while (robot.frontRight.getCurrentPosition() < 780) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();

@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -14,14 +13,16 @@ public class Robot {
     DcMotor backRight;
     DcMotor carouselMotor;
     DcMotorEx intakeArm;
+    DcMotorEx intakeMotor;
 
     public void hardwareMap(HardwareMap hardwareMap){
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
-        //intakeArm = hardwareMap.get(DcMotorEx.class, "armMotor");
-        //carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
+        intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
+        intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
+        carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
@@ -33,25 +34,38 @@ public class Robot {
         backRight.setPower(Power);
     }
 
-    public void strafe(double Power) {
+    public void backward(double Power) {
+        frontLeft.setPower(-Power);
+        frontRight.setPower(-Power);
+        backLeft.setPower(-Power);
+        backRight.setPower(-Power);
+    }
+
+    public void strafeRight(double Power) {
         frontLeft.setPower(Power);
         frontRight.setPower(-Power);
         backLeft.setPower(-Power);
         backRight.setPower(Power);
     }
-
-    public void turnRight(double Power) {
+    public void strafeLeft(double Power) {
         frontLeft.setPower(-Power);
         frontRight.setPower(Power);
-        backLeft.setPower(-Power);
-        backRight.setPower(Power);
+        backLeft.setPower(Power);
+        backRight.setPower(-Power);
     }
 
-    public void turnLeft(double Power) {
+    public void turnRight(double Power) {
         frontLeft.setPower(Power);
         frontRight.setPower(-Power);
         backLeft.setPower(Power);
         backRight.setPower(-Power);
+    }
+
+    public void turnLeft(double Power) {
+        frontLeft.setPower(-Power);
+        frontRight.setPower(Power);
+        backLeft.setPower(-Power);
+        backRight.setPower(Power);
     }
 
     public void stop () {

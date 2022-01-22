@@ -56,54 +56,75 @@ public class CrimsonTeleop extends OpMode {
             //-70
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
-            while(intakeArm.isBusy()) {
+            //while(intakeArm.isBusy()) {
+                frontLeft.setPower((yPower + xPower + rx) * 0.5);
+                frontRight.setPower((yPower - xPower - rx) * 0.5);
+                backLeft.setPower((yPower - xPower + rx) * 0.5);
+                backRight.setPower((yPower + xPower - rx) * 0.5);
+
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
                 telemetry.addData("Motor velocity at", intakeArm.getVelocity());
                 telemetry.addData("Motor power at", intakeArm.getPower());
                 telemetry.update();
             }
-        }
+
 
         if (gamepad2.y) {
             intakeArm.setTargetPosition(-168);
             //-70
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
-            while(intakeArm.isBusy()) {
+            //while(intakeArm.isBusy()) {
+                frontLeft.setPower((yPower + xPower + rx) * 0.5);
+                frontRight.setPower((yPower - xPower - rx) * 0.5);
+                backLeft.setPower((yPower - xPower + rx) * 0.5);
+                backRight.setPower((yPower + xPower - rx) * 0.5);
+
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
                 telemetry.addData("Motor velocity at", intakeArm.getVelocity());
                 telemetry.addData("Motor power at", intakeArm.getPower());
                 telemetry.update();
             }
-        }
-        telemetry.addData("arm position is", intakeArm.getCurrentPosition());
+
+
 
         if (gamepad2.b) {
-            intakeArm.setTargetPosition(-322);
+            intakeArm.setTargetPosition(-342);
             //-120
+            //-322
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
-            while(intakeArm.isBusy()) {
+            //while(intakeArm.isBusy()) {
+                frontLeft.setPower((yPower + xPower + rx) * 0.5);
+                frontRight.setPower((yPower - xPower - rx) * 0.5);
+                backLeft.setPower((yPower - xPower + rx) * 0.5);
+                backRight.setPower((yPower + xPower - rx) * 0.5);
+
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
                 telemetry.update();
             }
-        }
+
 
         if (gamepad2.a) {
             intakeArm.setTargetPosition(-590);
             //-590
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-            intakeArm.setVelocity(armVelocity);;
-            while(intakeArm.isBusy()) {
+            intakeArm.setVelocity(armVelocity);
+            //while(intakeArm.isBusy()) {
+                frontLeft.setPower((yPower + xPower + rx) * 0.5);
+                frontRight.setPower((yPower - xPower - rx) * 0.5);
+                backLeft.setPower((yPower - xPower + rx) * 0.5);
+                backRight.setPower((yPower + xPower - rx) * 0.5);
+
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
                 telemetry.update();
             }
 
-        }
+
 
         //rotate the carousel
         double carouselPower = 0.75; //needs to be low bc motor moves faster than servo
@@ -124,13 +145,14 @@ public class CrimsonTeleop extends OpMode {
         }
 
         //Intake movement
-        double intakePower = 0.5;
-        if (gamepad2.dpad_down) {
+        double intakePower = 0.75;
+
+        if (gamepad2.right_trigger > 0.3) {
             intakeMotor.setPower(intakePower);
             telemetry.addData("Intake moving inwards", "true");
             telemetry.update();
         }
-        else if (gamepad2.dpad_up) {
+        else if (gamepad2.left_trigger > 0.3) {
             intakeMotor.setPower(-intakePower);
             telemetry.addData("Intake moving outwards", "true");
             telemetry.update();

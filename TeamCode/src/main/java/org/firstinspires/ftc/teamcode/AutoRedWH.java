@@ -12,6 +12,33 @@ public class AutoRedWH extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        robot.hardwareMap(hardwareMap);
+        waitForStart();
+        robot.turnLeft(0.5);
+        sleep(500);
+        robot.strafeLeft(0.5);
+        sleep(500);
+        robot.strafeRight(0.5);
+        sleep(1000);
+        robot.turnLeft(0.5);
+        sleep(500);
+        robot.strafeRight(0.5);
+        sleep(5000);
+        robot.forward(0.25);
+        sleep(500);
+        robot.carouselMotor.setPower(0.7);
+        sleep(4000);
+        robot.backward(0.5);
+        sleep(500);
+        robot.strafeLeft(0.5);
+        sleep(1000);
+        robot.turnLeft(0.5);
+        sleep(700);
+        robot.strafeRight(0.5);
+        sleep(500);
+        robot.forward(0.5);
+        sleep(4000);
+        robot.stop();
         /*waitForStart();
         encodedMotors.hardwareMap(hardwareMap);
 
