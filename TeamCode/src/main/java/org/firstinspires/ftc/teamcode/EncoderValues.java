@@ -17,19 +17,22 @@ public class EncoderValues extends OpMode {
     DcMotor frontRight;
     DcMotorEx intakeArm;
 
-
+@Override
     public void init() {
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
 
     }
-
+@Override
     public void loop() {
-        telemetry.addData("Mecanum encoder value", frontRight.getCurrentPosition());
         telemetry.addData("Intake Motor encoder value", intakeArm.getCurrentPosition());
-
         telemetry.update();
-
+//830
+    //668
+    //469
+    //1600
+    //320
+    //166
         if (gamepad1.a) {
             frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             telemetry.addData("Encoder reset", "True");

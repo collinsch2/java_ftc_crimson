@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import static android.os.SystemClock.sleep;
 
@@ -16,8 +17,10 @@ public class CrimsonTeleop extends OpMode {
     DcMotor backLeft;
     DcMotor backRight;
     DcMotor carouselMotor;
+    DcMotorEx intakeArm;
     DcMotorEx intakeMotor;
-    DcMotorEx armMotor;
+    //Servo clawRight;
+    //Servo clawLeft;
 
     @Override
     public void init() {
@@ -27,8 +30,8 @@ public class CrimsonTeleop extends OpMode {
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
-        armMotor = hardwareMap.get(DcMotorEx.class, "intakeArm");
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
+        intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     @Override
@@ -47,36 +50,59 @@ public class CrimsonTeleop extends OpMode {
         backRight.setPower((yPower + xPower - rx) * 0.5);
 
         //Raise and lower the arm
-        double armVelocity = 500;
-        if (gamepad2.a) {
-            armMotor.setTargetPosition(-70);
-            armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-            armMotor.setVelocity(armVelocity);
-            while(armMotor.isBusy()) {
+        double armVelocity = 1000;
+        if (gamepad2.x) {
+            intakeArm.setTargetPosition(-60);
+            //-70
+            intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+            while(intakeArm.isBusy()) {
                 telemetry.addData("Status", "Waiting for motor");
-                telemetry.addData("Motor at", armMotor.getCurrentPosition());
+                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
+                telemetry.addData("Motor velocity at", intakeArm.getVelocity());
+                telemetry.addData("Motor power at", intakeArm.getPower());
                 telemetry.update();
             }
         }
+
         if (gamepad2.y) {
-            armMotor.setTargetPosition(-590);
-            armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-            armMotor.setVelocity(armVelocity);
-            while(armMotor.isBusy()) {
+            intakeArm.setTargetPosition(-168);
+            //-70
+            intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+            while(intakeArm.isBusy()) {
                 telemetry.addData("Status", "Waiting for motor");
-                telemetry.addData("Motor at", armMotor.getCurrentPosition());
+                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
+                telemetry.addData("Motor velocity at", intakeArm.getVelocity());
+                telemetry.addData("Motor power at", intakeArm.getPower());
                 telemetry.update();
             }
         }
+        telemetry.addData("arm position is", intakeArm.getCurrentPosition());
+
         if (gamepad2.b) {
-            armMotor.setTargetPosition(-120);
-            armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-            armMotor.setVelocity(armVelocity);
-            while(armMotor.isBusy()) {
+            intakeArm.setTargetPosition(-322);
+            //-120
+            intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+            while(intakeArm.isBusy()) {
                 telemetry.addData("Status", "Waiting for motor");
-                telemetry.addData("Motor at", armMotor.getCurrentPosition());
+                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
                 telemetry.update();
             }
+        }
+
+        if (gamepad2.a) {
+            intakeArm.setTargetPosition(-590);
+            //-590
+            intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);;
+            while(intakeArm.isBusy()) {
+                telemetry.addData("Status", "Waiting for motor");
+                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
+                telemetry.update();
+            }
+
         }
 
         //rotate the carousel
@@ -84,36 +110,48 @@ public class CrimsonTeleop extends OpMode {
 
         if (gamepad1.x) {  //motor
             carouselMotor.setPower(carouselPower);
-            telemetry.addData("Servo moving clockwise", "true");
+            telemetry.addData("Carousel moving clockwise", "true");
             telemetry.update();
         }
-        if (gamepad1.y) {
+        else if (gamepad1.y) {
             carouselMotor.setPower(-carouselPower);
-            telemetry.addData("Servo moving counter-clockwise", "true");
+            telemetry.addData("Carousel moving counter-clockwise", "true");
             telemetry.update();
-        }
-        else {
+        } else {
             carouselMotor.setPower(0);
-            telemetry.addData("Servo is stopped", "true");
+            telemetry.addData("Carousel is stopped", "true");
             telemetry.update();
         }
 
         //Intake movement
+        double intakePower = 0.5;
         if (gamepad2.dpad_down) {
-            intakeMotor.setPower(-1.0);
+            intakeMotor.setPower(intakePower);
             telemetry.addData("Intake moving inwards", "true");
             telemetry.update();
         }
-        if (gamepad2.dpad_up) {
-            intakeMotor.setPower(1.0);
+        else if (gamepad2.dpad_up) {
+            intakeMotor.setPower(-intakePower);
             telemetry.addData("Intake moving outwards", "true");
             telemetry.update();
-        }
-        else {
+        } else {
             intakeMotor.setPower(0);
             telemetry.addData("Intake stopped", "true");
             telemetry.update();
         }
+
+        /*if (gamepad2.dpad_down) {
+            clawRight.setPosition(-1.0);
+            clawLeft.setPosition(1.0);
+            telemetry.addData("claw moving inwards", "true");
+            telemetry.update();
+        }
+        if (gamepad2.dpad_up) {
+            clawRight.setPosition(1.0);
+            clawLeft.setPosition(-1.0);
+            telemetry.addData("claw moving outwards", "true");
+            telemetry.update();
+        }*/
 
         //Moving the arm a different way
         /*if (gamepad2.left_bumper) {

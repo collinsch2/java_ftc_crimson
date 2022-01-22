@@ -13,15 +13,15 @@ public class Robot {
     DcMotor backLeft;
     DcMotor backRight;
     DcMotor carouselMotor;
-    DcMotorEx armMotor;
+    DcMotorEx intakeArm;
 
     public void hardwareMap(HardwareMap hardwareMap){
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
-        armMotor = hardwareMap.get(DcMotorEx.class, "intakeArm");
-        carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
+        //intakeArm = hardwareMap.get(DcMotorEx.class, "armMotor");
+        //carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
