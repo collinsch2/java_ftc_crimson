@@ -8,18 +8,18 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 @Autonomous(name = "RedWH")
 public class AutoRedWH extends LinearOpMode {
     Robot robot = new Robot();
-    RobotEncoded encodedMotors = new RobotEncoded();
+ //   RobotEncoded encodedMotors = new RobotEncoded();
 
     @Override
     public void runOpMode() throws InterruptedException {
-        waitForStart();
+        /*waitForStart();
         encodedMotors.hardwareMap(hardwareMap);
 
         //move to carousel
         encodedMotors.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encodedMotors.frontRight.setTargetPosition(-2500); //?
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        encodedMotors.strafe(-300);
+        encodedMotors.strafeRight(-300);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is strafing", "True");
             telemetry.update();
@@ -54,7 +54,7 @@ public class AutoRedWH extends LinearOpMode {
 
         encodedMotors.frontRight.setTargetPosition(-780);
         encodedMotors.frontRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        encodedMotors.strafe(-100);
+        encodedMotors.strafeRight(-100);
         while (encodedMotors.frontRight.isBusy()) {
             telemetry.addData("Robot is strafing", "True");
             telemetry.update();
@@ -74,7 +74,7 @@ public class AutoRedWH extends LinearOpMode {
         //autonomous complete
         telemetry.addData("Run", "Completed");
         telemetry.update();
-
+*/
     }
 
 }

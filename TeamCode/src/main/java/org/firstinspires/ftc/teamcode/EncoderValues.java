@@ -15,20 +15,17 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 public class EncoderValues extends OpMode {
 
     DcMotor frontRight;
-    DcMotorEx armMotor;
     DcMotorEx intakeArm;
 
 
     public void init() {
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
 
     }
 
     public void loop() {
         telemetry.addData("Mecanum encoder value", frontRight.getCurrentPosition());
-        //telemetry.addData("Arm Motor encoder value", armMotor.getCurrentPosition());
         telemetry.addData("Intake Motor encoder value", intakeArm.getCurrentPosition());
 
         telemetry.update();

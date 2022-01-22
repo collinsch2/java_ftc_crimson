@@ -12,10 +12,7 @@ public class Robot {
     DcMotorEx frontRight;
     DcMotor backLeft;
     DcMotor backRight;
-    DcMotor actuatorMotor;
     DcMotor carouselMotor;
-    CRServo leftClaw;
-    CRServo rightClaw;
     DcMotorEx armMotor;
 
     public void hardwareMap(HardwareMap hardwareMap){
@@ -23,11 +20,8 @@ public class Robot {
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
-        actuatorMotor = hardwareMap.get(DcMotor.class, "actuatorMotor");
-        armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
+        armMotor = hardwareMap.get(DcMotorEx.class, "intakeArm");
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
-        leftClaw = hardwareMap.get(CRServo.class, "leftClaw");
-        rightClaw = hardwareMap.get(CRServo.class, "rightClaw");
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }

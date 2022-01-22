@@ -16,7 +16,7 @@ public class AutoBlueWH extends LinearOpMode {
 
         //move to carousel
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.strafe(1);
+        robot.strafe(0.5);
         while (robot.frontRight.getCurrentPosition() <2500) {
             telemetry.addData("Robot is strafing", "True");
             telemetry.update();
@@ -25,7 +25,7 @@ public class AutoBlueWH extends LinearOpMode {
 
         //turn to position servo at carousel
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.turnRight(1);
+        robot.turnRight(0.5);
         while (robot.frontRight.getCurrentPosition() > -1140) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
@@ -39,7 +39,7 @@ public class AutoBlueWH extends LinearOpMode {
 
         //move to warehouse and park
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.forward(1);
+        robot.forward(0.5);
         while (robot.frontRight.getCurrentPosition() < -2650) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
@@ -47,7 +47,7 @@ public class AutoBlueWH extends LinearOpMode {
         robot.stop();
 
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.strafe(1);
+        robot.strafe(0.5);
         while (robot.frontRight.getCurrentPosition() < 780) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();
@@ -55,7 +55,7 @@ public class AutoBlueWH extends LinearOpMode {
         robot.stop();
 
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.forward(1);
+        robot.forward(0.5);
         while (robot.frontRight.getCurrentPosition() < 400) {
             telemetry.addData("Robot is moving", "True");
             telemetry.update();

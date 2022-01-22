@@ -41,15 +41,15 @@ public class CrimsonTeleop extends OpMode {
 
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeft.setPower((yPower + xPower + rx) * 0.75);
-        frontRight.setPower((yPower - xPower - rx) * 0.75);
-        backLeft.setPower((yPower - xPower + rx) * 0.75);
-        backRight.setPower((yPower + xPower - rx) * 0.75);
+        frontLeft.setPower((yPower + xPower + rx) * 0.5);
+        frontRight.setPower((yPower - xPower - rx) * 0.5);
+        backLeft.setPower((yPower - xPower + rx) * 0.5);
+        backRight.setPower((yPower + xPower - rx) * 0.5);
 
         //Raise and lower the arm
         double armVelocity = 500;
-        if (gamepad1.a) {
-            armMotor.setTargetPosition(70);
+        if (gamepad2.a) {
+            armMotor.setTargetPosition(-70);
             armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
@@ -58,8 +58,8 @@ public class CrimsonTeleop extends OpMode {
                 telemetry.update();
             }
         }
-        if (gamepad1.y) {
-            armMotor.setTargetPosition(590);
+        if (gamepad2.y) {
+            armMotor.setTargetPosition(-590);
             armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
@@ -68,8 +68,8 @@ public class CrimsonTeleop extends OpMode {
                 telemetry.update();
             }
         }
-        if (gamepad1.b) {
-            armMotor.setTargetPosition(120);
+        if (gamepad2.b) {
+            armMotor.setTargetPosition(-120);
             armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             armMotor.setVelocity(armVelocity);
             while(armMotor.isBusy()) {
@@ -92,7 +92,7 @@ public class CrimsonTeleop extends OpMode {
             telemetry.addData("Servo moving counter-clockwise", "true");
             telemetry.update();
         }
-        if (gamepad1.a) {
+        else {
             carouselMotor.setPower(0);
             telemetry.addData("Servo is stopped", "true");
             telemetry.update();
@@ -109,7 +109,7 @@ public class CrimsonTeleop extends OpMode {
             telemetry.addData("Intake moving outwards", "true");
             telemetry.update();
         }
-        if (gamepad2.x) {
+        else {
             intakeMotor.setPower(0);
             telemetry.addData("Intake stopped", "true");
             telemetry.update();
