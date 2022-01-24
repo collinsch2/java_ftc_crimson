@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class AutoBlueCarousel extends LinearOpMode {
     Robot robot = new Robot();
     RobotEncoded2 encoders = new RobotEncoded2();
+    CrimTensorFlow crimtfod = new CrimTensorFlow();
+
     public void telemetryLoop(){
         while (encoders.frontRight.isBusy() && encoders.frontLeft.isBusy() && encoders.backLeft.isBusy() && encoders.backRight.isBusy()) {
             telemetry.addData("Wheels", "are busy");
@@ -26,6 +28,7 @@ public class AutoBlueCarousel extends LinearOpMode {
 
         encoders.hardwareMap(hardwareMap);
         waitForStart();
+
         encoders.setDistance(5);
         encoders.forward(200);
         telemetryLoop();

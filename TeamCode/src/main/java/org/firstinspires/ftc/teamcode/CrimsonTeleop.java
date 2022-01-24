@@ -11,7 +11,6 @@ import static android.os.SystemClock.sleep;
 
 @TeleOp(name="CrimsonTeleop")
 public class CrimsonTeleop extends OpMode {
-
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;
@@ -51,12 +50,11 @@ public class CrimsonTeleop extends OpMode {
 
         //Raise and lower the arm
         double armVelocity = 1000;
-        if (gamepad2.x) {
+        if (gamepad2.x) { //default
             intakeArm.setTargetPosition(-60);
-            //-70
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
-            //while(intakeArm.isBusy()) {
+
                 frontLeft.setPower((yPower + xPower + rx) * 0.5);
                 frontRight.setPower((yPower - xPower - rx) * 0.5);
                 backLeft.setPower((yPower - xPower + rx) * 0.5);
@@ -70,12 +68,12 @@ public class CrimsonTeleop extends OpMode {
             }
 
 
-        if (gamepad2.y) {
+        if (gamepad2.y) { //level 1
             intakeArm.setTargetPosition(-168);
             //-70
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
-            //while(intakeArm.isBusy()) {
+
                 frontLeft.setPower((yPower + xPower + rx) * 0.5);
                 frontRight.setPower((yPower - xPower - rx) * 0.5);
                 backLeft.setPower((yPower - xPower + rx) * 0.5);
@@ -90,13 +88,12 @@ public class CrimsonTeleop extends OpMode {
 
 
 
-        if (gamepad2.b) {
+        if (gamepad2.b) {// level 2
             intakeArm.setTargetPosition(-342);
             //-120
-            //-322
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
-            //while(intakeArm.isBusy()) {
+
                 frontLeft.setPower((yPower + xPower + rx) * 0.5);
                 frontRight.setPower((yPower - xPower - rx) * 0.5);
                 backLeft.setPower((yPower - xPower + rx) * 0.5);
@@ -108,12 +105,12 @@ public class CrimsonTeleop extends OpMode {
             }
 
 
-        if (gamepad2.a) {
+        if (gamepad2.a) {// level 3
             intakeArm.setTargetPosition(-590);
             //-590
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
-            //while(intakeArm.isBusy()) {
+
                 frontLeft.setPower((yPower + xPower + rx) * 0.5);
                 frontRight.setPower((yPower - xPower - rx) * 0.5);
                 backLeft.setPower((yPower - xPower + rx) * 0.5);
@@ -129,7 +126,7 @@ public class CrimsonTeleop extends OpMode {
         //rotate the carousel
         double carouselPower = 0.75; //needs to be low bc motor moves faster than servo
 
-        if (gamepad1.x) {  //motor
+        if (gamepad1.x) {
             carouselMotor.setPower(carouselPower);
             telemetry.addData("Carousel moving clockwise", "true");
             telemetry.update();

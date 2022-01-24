@@ -14,6 +14,8 @@ public class RobotEncoded2 {
     static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;
     static final double     TICKS_PER_INCH         = ((WHEEL_DIAMETER_INCHES* 3.1415)/(TICKS_PER_MOTOR_ROTATION*GEAR_REDUCTION));
 
+    static final double     WHEEL_DIAMETER_MM   = 96 ;
+    static final double     TICKS_PER_MM         = ((WHEEL_DIAMETER_MM* 3.1415)/(TICKS_PER_MOTOR_ROTATION*GEAR_REDUCTION));
 
     DcMotorEx frontLeft;
     DcMotorEx frontRight;
