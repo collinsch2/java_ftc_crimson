@@ -40,16 +40,23 @@ public class CrimsonTeleop extends OpMode {
         double yPower = -gamepad1.left_stick_y;
         double xPower = gamepad1.left_stick_x;
         double rx = gamepad1.right_stick_x;
+        double drivePower = 0.5;
 
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeft.setPower((yPower + xPower + rx) * 0.5);
-        frontRight.setPower((yPower - xPower - rx) * 0.5);
-        backLeft.setPower((yPower - xPower + rx) * 0.5);
-        backRight.setPower((yPower + xPower - rx) * 0.5);
+        frontLeft.setPower((yPower + xPower + rx) * drivePower);
+        frontRight.setPower((yPower - xPower - rx) * drivePower);
+        backLeft.setPower((yPower - xPower + rx) * drivePower);
+        backRight.setPower((yPower + xPower - rx) * drivePower);
+
+        if(gamepad1.right_bumper){
+            drivePower = 0.25;
+        } else{
+            drivePower = 0.5;
+        }
 
         //Raise and lower the arm
-        double armVelocity = 1000;
+        double armVelocity = 1500;
         if (gamepad2.x) { //default
             intakeArm.setTargetPosition(-60);
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -121,18 +128,28 @@ public class CrimsonTeleop extends OpMode {
                 telemetry.update();
             }
 
+        if(gamepad2.dpad_up){ // up
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 10);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+        }
 
+        if(gamepad2.dpad_down){ // down
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 10);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+        }
 
         //rotate the carousel
-        double carouselPower = 0.75; //needs to be low bc motor moves faster than servo
+        //double carouselPower = 0.75; //needs to be low bc motor moves faster than servo
 
         if (gamepad1.x) {
-            carouselMotor.setPower(carouselPower);
+            carouselMotor.setPower(0.9);
             telemetry.addData("Carousel moving clockwise", "true");
             telemetry.update();
         }
         else if (gamepad1.y) {
-            carouselMotor.setPower(-carouselPower);
+            carouselMotor.setPower(1);
             telemetry.addData("Carousel moving counter-clockwise", "true");
             telemetry.update();
         } else {
