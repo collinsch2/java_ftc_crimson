@@ -14,8 +14,15 @@ public class AutoBlueWH extends LinearOpMode {
         robot.hardwareMap(hardwareMap);
 
         waitForStart();
+        robot.turnLeft(0.5);
+        sleep(500);
+        robot.strafeLeft(0.5);
+        sleep(1000);
+        robot.forward(0.5);
+        sleep(2000);
+        robot.stop();
 
-        robot.hardwareMap(hardwareMap);
+        /*robot.hardwareMap(hardwareMap);
 
         //move to carousel
         robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -70,4 +77,6 @@ public class AutoBlueWH extends LinearOpMode {
         telemetry.update();
     }
 }
-
+*/
+    }
+}

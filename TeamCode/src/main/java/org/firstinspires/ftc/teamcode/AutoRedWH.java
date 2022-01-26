@@ -14,7 +14,15 @@ public class AutoRedWH extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot.hardwareMap(hardwareMap);
         waitForStart();
-        robot.turnLeft(0.5);
+        robot.turnRight(0.5);
+        sleep(500);
+        robot.strafeRight(0.5);
+        sleep(1000);
+        robot.forward(0.5);
+        sleep(2000);
+        robot.stop();
+
+        /*robot.turnLeft(0.5);
         sleep(500);
         robot.strafeLeft(0.5);
         sleep(500);

@@ -60,14 +60,14 @@ public class CrimsonTeleop extends OpMode {
         //Raise and lower the arm
         double armVelocity = 1500;
         if (gamepad2.x) { //default
-            intakeArm.setTargetPosition(-60);
+            intakeArm.setTargetPosition(-106);
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
-                frontLeft.setPower((yPower + xPower + rx) * 0.5);
-                frontRight.setPower((yPower - xPower - rx) * 0.5);
-                backLeft.setPower((yPower - xPower + rx) * 0.5);
-                backRight.setPower((yPower + xPower - rx) * 0.5);
+                frontLeft.setPower((yPower + xPower + rx) * drivePower);
+                frontRight.setPower((yPower - xPower - rx) * drivePower);
+                backLeft.setPower((yPower - xPower + rx) * drivePower);
+                backRight.setPower((yPower + xPower - rx) * drivePower);
 
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
@@ -83,10 +83,10 @@ public class CrimsonTeleop extends OpMode {
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
-                frontLeft.setPower((yPower + xPower + rx) * 0.5);
-                frontRight.setPower((yPower - xPower - rx) * 0.5);
-                backLeft.setPower((yPower - xPower + rx) * 0.5);
-                backRight.setPower((yPower + xPower - rx) * 0.5);
+                frontLeft.setPower((yPower + xPower + rx) * drivePower);
+                frontRight.setPower((yPower - xPower - rx) * drivePower);
+                backLeft.setPower((yPower - xPower + rx) * drivePower);
+                backRight.setPower((yPower + xPower - rx) * drivePower);
 
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
@@ -95,7 +95,7 @@ public class CrimsonTeleop extends OpMode {
                 telemetry.update();
             }
 
-
+telemetry.addData("arm is" , intakeArm.getCurrentPosition());
 
         if (gamepad2.b) {// level 2
             intakeArm.setTargetPosition(-342);
@@ -103,10 +103,10 @@ public class CrimsonTeleop extends OpMode {
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
-                frontLeft.setPower((yPower + xPower + rx) * 0.5);
-                frontRight.setPower((yPower - xPower - rx) * 0.5);
-                backLeft.setPower((yPower - xPower + rx) * 0.5);
-                backRight.setPower((yPower + xPower - rx) * 0.5);
+                frontLeft.setPower((yPower + xPower + rx) * drivePower);
+                frontRight.setPower((yPower - xPower - rx) * drivePower);
+                backLeft.setPower((yPower - xPower + rx) * drivePower);
+                backRight.setPower((yPower + xPower - rx) * drivePower);
 
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
@@ -120,10 +120,10 @@ public class CrimsonTeleop extends OpMode {
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
-                frontLeft.setPower((yPower + xPower + rx) * 0.5);
-                frontRight.setPower((yPower - xPower - rx) * 0.5);
-                backLeft.setPower((yPower - xPower + rx) * 0.5);
-                backRight.setPower((yPower + xPower - rx) * 0.5);
+                frontLeft.setPower((yPower + xPower + rx) * drivePower);
+                frontRight.setPower((yPower - xPower - rx) * drivePower);
+                backLeft.setPower((yPower - xPower + rx) * drivePower);
+                backRight.setPower((yPower + xPower - rx) * drivePower);
 
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
@@ -143,15 +143,15 @@ public class CrimsonTeleop extends OpMode {
         }
 
         //rotate the carousel
-        //double carouselPower = 0.75; //needs to be low bc motor moves faster than servo
+        double carouselPower = 1; //needs to be low bc motor moves faster than servo
 
         if (gamepad1.x) {
-            carouselMotor.setPower(0.9);
+            carouselMotor.setPower(carouselPower);
             telemetry.addData("Carousel moving clockwise", "true");
             telemetry.update();
         }
         else if (gamepad1.y) {
-            carouselMotor.setPower(1);
+            carouselMotor.setPower(-carouselPower);
             telemetry.addData("Carousel moving counter-clockwise", "true");
             telemetry.update();
         } else {
