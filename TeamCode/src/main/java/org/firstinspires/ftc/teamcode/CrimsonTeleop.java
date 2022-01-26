@@ -40,7 +40,14 @@ public class CrimsonTeleop extends OpMode {
         double yPower = -gamepad1.left_stick_y;
         double xPower = gamepad1.left_stick_x;
         double rx = gamepad1.right_stick_x;
-        double drivePower = 0.5;
+        double drivePower;
+
+        if (gamepad1.right_bumper) {
+            drivePower = 0.25;
+        }
+        else {
+            drivePower = 0.5;
+        }
 
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -49,11 +56,6 @@ public class CrimsonTeleop extends OpMode {
         backLeft.setPower((yPower - xPower + rx) * drivePower);
         backRight.setPower((yPower + xPower - rx) * drivePower);
 
-        if(gamepad1.right_bumper){
-            drivePower = 0.25;
-        } else{
-            drivePower = 0.5;
-        }
 
         //Raise and lower the arm
         double armVelocity = 1500;

@@ -34,8 +34,10 @@ public class RobotEncoded2 {
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
+
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
 
     public void setDistance (int distanceInches){
@@ -44,13 +46,18 @@ public class RobotEncoded2 {
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         frontLeft.setTargetPosition((int)(distanceInches*TICKS_PER_INCH));
         frontRight.setTargetPosition((int)(distanceInches*TICKS_PER_INCH));
         backLeft.setTargetPosition((int)(distanceInches*TICKS_PER_INCH));
         backRight.setTargetPosition((int)(distanceInches*TICKS_PER_INCH));
     }
 
-    public void strafeLeft(int velocity){
+    public void strafeLeft(double power){
         frontLeft.setTargetPosition(frontLeft.getTargetPosition()*-1);
         backRight.setTargetPosition(backRight.getTargetPosition()*-1);
 
@@ -59,13 +66,13 @@ public class RobotEncoded2 {
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRight.setVelocity(velocity);
-        frontLeft.setVelocity(velocity);
-        backLeft.setVelocity(velocity);
-        backRight.setVelocity(velocity);
+        frontRight.setPower(power);
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
     }
 
-    public void strafeRight(int velocity){
+    public void strafeRight(double power){
         frontRight.setTargetPosition(frontRight.getTargetPosition()*-1);
         backLeft.setTargetPosition(backLeft.getTargetPosition()*-1);
 
@@ -74,26 +81,26 @@ public class RobotEncoded2 {
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRight.setVelocity(velocity);
-        frontLeft.setVelocity(velocity);
-        backLeft.setVelocity(velocity);
-        backRight.setVelocity(velocity);
+        frontRight.setPower(power);
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
     }
 
-    public void forward(int velocity) {
+    public void forward(double power) {
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRight.setVelocity(velocity);
-        frontLeft.setVelocity(velocity);
-        backLeft.setVelocity(velocity);
-        backRight.setVelocity(velocity);
+        frontRight.setPower(power);
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
 
     }
 
-    public void backward(int velocity){
+    public void backward(double power){
         frontLeft.setTargetPosition(frontLeft.getTargetPosition()*-1);
         frontRight.setTargetPosition(frontRight.getTargetPosition()*-1);
         backRight.setTargetPosition(backRight.getTargetPosition()*-1);
@@ -104,13 +111,13 @@ public class RobotEncoded2 {
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRight.setVelocity(velocity);
-        frontLeft.setVelocity(velocity);
-        backLeft.setVelocity(velocity);
-        backRight.setVelocity(velocity);
+        frontRight.setPower(power);
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
     }
 
-    public void turnRight(int velocity){
+    public void turnRight(double power){
         frontRight.setTargetPosition(frontRight.getTargetPosition()*-1);
         backRight.setTargetPosition(backRight.getTargetPosition()*-1);
 
@@ -119,13 +126,13 @@ public class RobotEncoded2 {
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRight.setVelocity(velocity);
-        frontLeft.setVelocity(velocity);
-        backLeft.setVelocity(velocity);
-        backRight.setVelocity(velocity);
+        frontRight.setPower(power);
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
     }
 
-    public void turnLeft(int velocity){
+    public void turnLeft(double power){
         frontLeft.setTargetPosition(frontRight.getTargetPosition()*-1);
         backLeft.setTargetPosition(backRight.getTargetPosition()*-1);
 
@@ -134,10 +141,10 @@ public class RobotEncoded2 {
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRight.setVelocity(velocity);
-        frontLeft.setVelocity(velocity);
-        backLeft.setVelocity(velocity);
-        backRight.setVelocity(velocity);
+        frontRight.setPower(power);
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
     }
 
     public void stop () {
