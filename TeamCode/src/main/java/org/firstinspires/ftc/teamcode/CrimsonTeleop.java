@@ -62,7 +62,7 @@ public class CrimsonTeleop extends OpMode {
         if (gamepad2.x) { //default
             intakeArm.setTargetPosition(-106);
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-            intakeArm.setVelocity(armVelocity);
+            intakeArm.setVelocity(1000);
 
                 frontLeft.setPower((yPower + xPower + rx) * drivePower);
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
@@ -130,14 +130,14 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
                 telemetry.update();
             }
 
-        if(gamepad2.dpad_up){ // up
-            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 10);
+        if(gamepad2.left_stick_y > 0.3){ // up
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 20);
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
         }
 
-        if(gamepad2.dpad_down){ // down
-            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 10);
+        if(gamepad2.left_stick_y < -0.3){ // down
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 20);
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
         }

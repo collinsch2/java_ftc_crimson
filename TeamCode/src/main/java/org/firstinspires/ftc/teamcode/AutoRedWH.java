@@ -15,9 +15,9 @@ public class AutoRedWH extends LinearOpMode {
         robot.hardwareMap(hardwareMap);
         waitForStart();
         robot.turnRight(0.5);
-        sleep(500);
+        sleep(600);
         robot.strafeRight(0.5);
-        sleep(1000);
+        sleep(800);
         robot.forward(0.5);
         sleep(2000);
         robot.stop();

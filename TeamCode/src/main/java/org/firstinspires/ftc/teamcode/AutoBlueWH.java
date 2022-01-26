@@ -15,9 +15,9 @@ public class AutoBlueWH extends LinearOpMode {
 
         waitForStart();
         robot.turnLeft(0.5);
-        sleep(500);
+        sleep(600);
         robot.strafeLeft(0.5);
-        sleep(1000);
+        sleep(500);
         robot.forward(0.5);
         sleep(2000);
         robot.stop();
