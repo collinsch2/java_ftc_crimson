@@ -8,14 +8,28 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "bricks")
 public class AutoBlueCarousel extends LinearOpMode {
-
+    Robot robot = new Robot();
     RobotEncoded2 encoders = new RobotEncoded2();
 
 
     @Override
     public void runOpMode() throws InterruptedException {
+        robot.hardwareMap(hardwareMap);
+        waitForStart();
 
-        final double TICKS_PER_MOTOR_ROTATION = 537.7;
+        robot.strafeRight(0.3);
+        sleep(4000);
+        robot.carouselMotor.setPower(-0.7);
+        telemetry.addData("Carousel power is", robot.carouselMotor.getPower());
+        telemetry.update();
+        sleep(4000);
+        robot.forward(0.3);
+        sleep(4000);
+        robot.turnLeft(0.25);
+        sleep(500);
+        robot.stop();
+
+        /*final double TICKS_PER_MOTOR_ROTATION = 537.7;
         final double GEAR_REDUCTION = 2.0;
         final double WHEEL_DIAMETER_INCHES = 3.77953;
         final double TICKS_PER_INCH = ((WHEEL_DIAMETER_INCHES * 3.1415) / (TICKS_PER_MOTOR_ROTATION * GEAR_REDUCTION));
@@ -177,6 +191,6 @@ public class AutoBlueCarousel extends LinearOpMode {
 
         }
     }
-}
+
 
 

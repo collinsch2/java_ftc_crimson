@@ -60,7 +60,7 @@ public class CrimsonTeleop extends OpMode {
         //Raise and lower the arm
         double armVelocity = 1500;
         if (gamepad2.x) { //default
-            intakeArm.setTargetPosition(-106);
+            intakeArm.setTargetPosition(-80);
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(1000);
 
@@ -135,9 +135,20 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
         }
+        if(gamepad2.dpad_up){ // up
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 20);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+        }
 
         if(gamepad2.left_stick_y < -0.3){ // down
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 20);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+        }
+
+        if(gamepad2.dpad_down){ // down
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 20);
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
         }
@@ -161,15 +172,15 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
         }
 
         //Intake movement
-        double intakePower = 0.75;
+        //double intakePower = 0.75;
 
         if (gamepad2.right_trigger > 0.3) {
-            intakeMotor.setPower(intakePower);
+            intakeMotor.setPower(0.9);
             telemetry.addData("Intake moving inwards", "true");
             telemetry.update();
         }
         else if (gamepad2.left_trigger > 0.3) {
-            intakeMotor.setPower(-intakePower);
+            intakeMotor.setPower(-0.5);
             telemetry.addData("Intake moving outwards", "true");
             telemetry.update();
         } else {

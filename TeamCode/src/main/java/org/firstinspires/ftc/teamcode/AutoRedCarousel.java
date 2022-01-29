@@ -1,4 +1,4 @@
-/*package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -28,26 +28,23 @@ public class AutoRedCarousel extends LinearOpMode {
         robot.turnLeft(0.5);
         sleep(500);
         robot.strafeRight(0.5);
-        sleep(1500);
-        robot.forward(0.5);
+        sleep(2000);
+        robot.forward(0.3);
+        sleep(3000);
+        robot.stop();
         sleep(1000);
-        robot.carouselMotor.setPower(0.7);
+        robot.moveCarousel(0.7);
+        telemetry.addData("Carousel power is", robot.carouselMotor.getPower());
+        telemetry.update();
         sleep(4000);
         robot.backward(0.5);
         sleep(500);
-        robot.strafeLeft(0.5);
-        sleep(1000);
-        robot.turnLeft(0.5);
-        sleep(600);
-        robot.strafeRight(0.5);
-        sleep(1000);
-        robot.forward(0.5);
-        sleep(4000);
         robot.stop();
 
         telemetry.addData("Path", "Completed");
+        telemetry.update();
         }
 
     }
 
-*/
+
