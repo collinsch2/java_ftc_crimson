@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 
-@Autonomous(name = "TestRC")
+@Autonomous(name = "RedCAROUSEL")
 public class AutoRedCarousel extends LinearOpMode {
     Robot robot = new Robot();
 

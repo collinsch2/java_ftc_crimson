@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@Autonomous(name = "BlueWH")
+@Autonomous(name = "BlueWAREHOUSE")
 public class AutoBlueWH extends LinearOpMode {
     Robot robot = new Robot();
 

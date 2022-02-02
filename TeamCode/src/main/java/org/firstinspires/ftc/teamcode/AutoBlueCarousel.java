@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "bricks")
+@Autonomous(name = "BlueCAROUSEL")
 public class AutoBlueCarousel extends LinearOpMode {
     Robot robot = new Robot();
     RobotEncoded2 encoders = new RobotEncoded2();

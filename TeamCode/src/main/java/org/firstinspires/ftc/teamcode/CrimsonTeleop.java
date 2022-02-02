@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -18,8 +19,6 @@ public class CrimsonTeleop extends OpMode {
     DcMotor carouselMotor;
     DcMotorEx intakeArm;
     DcMotorEx intakeMotor;
-    //Servo clawRight;
-    //Servo clawLeft;
 
     @Override
     public void init() {
@@ -31,6 +30,8 @@ public class CrimsonTeleop extends OpMode {
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override
@@ -49,8 +50,7 @@ public class CrimsonTeleop extends OpMode {
             drivePower = 0.5;
         }
 
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
-        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
         frontLeft.setPower((yPower + xPower + rx) * drivePower);
         frontRight.setPower((yPower - xPower - rx) * drivePower);
         backLeft.setPower((yPower - xPower + rx) * drivePower);
@@ -64,6 +64,10 @@ public class CrimsonTeleop extends OpMode {
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(1000);
 
+                yPower = -gamepad1.left_stick_y;
+                xPower = gamepad1.left_stick_x;
+                rx = gamepad1.right_stick_x;
+
                 frontLeft.setPower((yPower + xPower + rx) * drivePower);
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
@@ -74,8 +78,8 @@ public class CrimsonTeleop extends OpMode {
                 telemetry.addData("Motor velocity at", intakeArm.getVelocity());
                 telemetry.addData("Motor power at", intakeArm.getPower());
                 telemetry.update();
-            }
 
+        }
 
         if (gamepad2.y) { //level 1
             intakeArm.setTargetPosition(-168);
@@ -83,6 +87,10 @@ public class CrimsonTeleop extends OpMode {
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
+                yPower = -gamepad1.left_stick_y;
+                xPower = gamepad1.left_stick_x;
+                rx = gamepad1.right_stick_x;
+
                 frontLeft.setPower((yPower + xPower + rx) * drivePower);
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
@@ -93,7 +101,8 @@ public class CrimsonTeleop extends OpMode {
                 telemetry.addData("Motor velocity at", intakeArm.getVelocity());
                 telemetry.addData("Motor power at", intakeArm.getPower());
                 telemetry.update();
-            }
+
+        }
 
 telemetry.addData("arm is" , intakeArm.getCurrentPosition());
 
@@ -103,6 +112,10 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
+                yPower = -gamepad1.left_stick_y;
+                xPower = gamepad1.left_stick_x;
+                rx = gamepad1.right_stick_x;
+
                 frontLeft.setPower((yPower + xPower + rx) * drivePower);
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
@@ -111,8 +124,8 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
                 telemetry.update();
-            }
 
+        }
 
         if (gamepad2.a) {// level 3
             intakeArm.setTargetPosition(-590);
@@ -120,6 +133,10 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
+                yPower = -gamepad1.left_stick_y;
+                xPower = gamepad1.left_stick_x;
+                rx = gamepad1.right_stick_x;
+
                 frontLeft.setPower((yPower + xPower + rx) * drivePower);
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
@@ -128,7 +145,8 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
                 telemetry.addData("Status", "Waiting for motor");
                 telemetry.addData("Motor at", intakeArm.getCurrentPosition());
                 telemetry.update();
-            }
+
+        }
 
         if(gamepad2.left_stick_y > 0.3){ // up
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 20);
@@ -156,12 +174,12 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
         //rotate the carousel
         double carouselPower = 1; //needs to be low bc motor moves faster than servo
 
-        if (gamepad1.x) {
+        if (gamepad1.b) {//red
             carouselMotor.setPower(carouselPower);
             telemetry.addData("Carousel moving clockwise", "true");
             telemetry.update();
         }
-        else if (gamepad1.y) {
+        else if (gamepad1.x) {//blue
             carouselMotor.setPower(-carouselPower);
             telemetry.addData("Carousel moving counter-clockwise", "true");
             telemetry.update();

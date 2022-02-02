@@ -5,22 +5,45 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@Autonomous(name = "RedWH")
+@Autonomous(name = "RedWAREHOUSE")
 public class AutoRedWH extends LinearOpMode {
     Robot robot = new Robot();
- //   RobotEncoded encodedMotors = new RobotEncoded();
+    RobotEncoded2 encoders = new RobotEncoded2();
 
     @Override
     public void runOpMode() throws InterruptedException {
-        robot.hardwareMap(hardwareMap);
+        encoders.hardwareMap(hardwareMap);
         waitForStart();
-        robot.turnRight(0.5);
+
+        encoders.forward(20);
+
+        while (encoders.backLeft.isBusy() && encoders.backRight.isBusy() && encoders.frontLeft.isBusy() && encoders.frontRight.isBusy()) {
+            telemetry.addData("Front right", encoders.frontRight.getCurrentPosition());
+            telemetry.addData("Front left", encoders.frontLeft.getCurrentPosition());
+            telemetry.addData("back left", encoders.backLeft.getCurrentPosition());
+            telemetry.addData("back right", encoders.backRight.getCurrentPosition());
+
+            telemetry.addData("Front right velocity", encoders.frontRight.getVelocity());
+            telemetry.addData("Front left velocity", encoders.frontLeft.getVelocity());
+            telemetry.addData("back left velocity", encoders.backLeft.getVelocity());
+            telemetry.addData("back right velocity", encoders.backRight.getVelocity());
+            telemetry.update();
+
+
+        }
+
+
+        encoders.stop();
+    }
+        /*robot.turnRight(0.5);
         sleep(600);
         robot.strafeRight(0.5);
         sleep(800);
         robot.forward(0.5);
         sleep(2000);
         robot.stop();
+
+         */
 
         /*robot.turnLeft(0.5);
         sleep(500);
@@ -112,5 +135,5 @@ public class AutoRedWH extends LinearOpMode {
 */
     }
 
-}
+
 
