@@ -15,9 +15,10 @@ public class AutoRedWH extends LinearOpMode {
         encoders.hardwareMap(hardwareMap);
         waitForStart();
 
-        encoders.forward(20);
 
-        while (encoders.backLeft.isBusy() && encoders.backRight.isBusy() && encoders.frontLeft.isBusy() && encoders.frontRight.isBusy()) {
+        encoders.strafeRight(10);
+
+        while (opModeIsActive()) {
             telemetry.addData("Front right", encoders.frontRight.getCurrentPosition());
             telemetry.addData("Front left", encoders.frontLeft.getCurrentPosition());
             telemetry.addData("back left", encoders.backLeft.getCurrentPosition());
@@ -28,12 +29,7 @@ public class AutoRedWH extends LinearOpMode {
             telemetry.addData("back left velocity", encoders.backLeft.getVelocity());
             telemetry.addData("back right velocity", encoders.backRight.getVelocity());
             telemetry.update();
-
-
         }
-
-
-        encoders.stop();
     }
         /*robot.turnRight(0.5);
         sleep(600);

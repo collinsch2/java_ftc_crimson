@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 
 import com.google.gson.FieldAttributes;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -130,7 +130,7 @@ public class CrimVuforia extends LinearOpMode
                 while (robotX < 700) {
                     sleep(100);
                 }
-            } */
+            }
 
 
         }
@@ -152,7 +152,7 @@ public class CrimVuforia extends LinearOpMode
         parameters.cameraName = webcamName;
         parameters.useExtendedTracking = false;
         vuforiaLocalizer = ClassFactory.createVuforiaLocalizer(parameters);
-        /*VuforiaLocalizer myVuforia = ClassFactory.getInstance().createVuforia(parameters);*/
+        /*VuforiaLocalizer myVuforia = ClassFactory.getInstance().createVuforia(parameters);
 
         // These are the vision targets that we want to use
         // The string needs to be the name of the appropriate .xml file in the assets folder
@@ -161,7 +161,7 @@ public class CrimVuforia extends LinearOpMode
 
         webcamLocation = createMatrix(0, mmBotWidth/2, 0, 90, 0, 180); // Set webcam location on robot
 
-        /*target*/VuforiaTrackable wheelTarget = visionTargets.get(0); // Setup the target to be tracked
+        targetVuforiaTrackable wheelTarget = visionTargets.get(0); // Setup the target to be tracked
         wheelTarget.setName("Wheels Target");
         wheelTarget.setLocation(createMatrix(0, 3581, 0, 90, 0, 0));
         wheelListener = (VuforiaTrackableDefaultListener) wheelTarget.getListener(); // Setup listener and inform it of webcam information
@@ -209,3 +209,6 @@ public class CrimVuforia extends LinearOpMode
 
 
 }
+
+
+ */
