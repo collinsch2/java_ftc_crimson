@@ -10,14 +10,6 @@ import static android.os.SystemClock.sleep;
 
 public class RobotEncoded2 {
 
-    static final double     TICKS_PER_MOTOR_ROTATION    = 537.7 ;
-    static final double     GEAR_REDUCTION    = 2.0;
-    static final double     WHEEL_DIAMETER_INCHES   = 3.77953;
-    static final double     TICKS_PER_INCH  = (TICKS_PER_MOTOR_ROTATION*GEAR_REDUCTION)/(WHEEL_DIAMETER_INCHES * 3.1415);
-    final double drivePower = 0.6;
-    final double driveVelocity = 500;
-    final double turnVelocity = 250;
-
     DcMotorEx frontLeft;
     DcMotorEx frontRight;
     DcMotorEx backLeft;
@@ -25,6 +17,14 @@ public class RobotEncoded2 {
     DcMotor carouselMotor;
     DcMotorEx intakeArm;
     DcMotorEx intakeMotor;
+
+    final double driveVelocity = 500;
+    final double turnVelocity = 250;
+
+    final double     TICKS_PER_MOTOR_ROTATION    = 537.7 ;
+    final double     GEAR_REDUCTION    = 1;
+    final double     WHEEL_DIAMETER_INCHES   = 3.77953;
+    final double     TICKS_PER_INCH  = (TICKS_PER_MOTOR_ROTATION*GEAR_REDUCTION)/(WHEEL_DIAMETER_INCHES * 3.1415);
 
 
     public void hardwareMap(HardwareMap hardwareMap){
@@ -50,8 +50,11 @@ public class RobotEncoded2 {
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontLeft.setTargetPosition(2000);
-        frontRight.setTargetPosition(2000);
+        int rightTarget = ((int)(distanceInches*TICKS_PER_INCH));
+        int leftTarget = ((int)(distanceInches*TICKS_PER_INCH));
+
+        frontLeft.setTargetPosition(leftTarget);
+        frontRight.setTargetPosition(rightTarget);
 
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -60,6 +63,23 @@ public class RobotEncoded2 {
         frontLeft.setVelocity(driveVelocity);
         backLeft.setVelocity(frontLeft.getVelocity());
         backRight.setVelocity(frontRight.getVelocity());
+
+        while (frontRight.isBusy() && frontLeft.isBusy()){
+
+        }
+
+        frontRight.setVelocity(0);
+        frontLeft.setVelocity(0);
+        backLeft.setVelocity(0);
+        backRight.setVelocity(0);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+
     }
 
 
@@ -67,38 +87,68 @@ public class RobotEncoded2 {
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontLeft.setTargetPosition(2000);
-        frontRight.setTargetPosition(2000);
+        frontLeft.setTargetPosition((int)(-distanceInches*TICKS_PER_INCH));
+        frontRight.setTargetPosition((int)(-distanceInches*TICKS_PER_INCH));
 
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRight.setVelocity(-driveVelocity);
+        frontRight.setVelocity(driveVelocity);
         frontLeft.setVelocity(driveVelocity);
-        backLeft.setVelocity(-frontLeft.getVelocity());
-        backRight.setVelocity(-frontRight.getVelocity());
+        backLeft.setVelocity(frontLeft.getVelocity());
+        backRight.setVelocity(frontRight.getVelocity());
+
+        while (frontRight.isBusy() && frontLeft.isBusy()){
+
+        }
+
+        frontRight.setVelocity(0);
+        frontLeft.setVelocity(0);
+        backLeft.setVelocity(0);
+        backRight.setVelocity(0);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
     }
 
     public void strafeRight (int distanceInches){
+
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeft.setTargetPosition((int)(distanceInches*TICKS_PER_INCH));
         frontRight.setTargetPosition((int)(-distanceInches*TICKS_PER_INCH));
-        backLeft.setTargetPosition((int)(-distanceInches*TICKS_PER_INCH));
-        backRight.setTargetPosition((int)(distanceInches*TICKS_PER_INCH));
 
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         frontLeft.setVelocity(driveVelocity);
         frontRight.setVelocity(driveVelocity);
-        backLeft.setVelocity(driveVelocity);
-        backRight.setVelocity(driveVelocity);
+        backLeft.setVelocity(-frontLeft.getVelocity());
+        backRight.setVelocity(-frontRight.getVelocity());
+
+        while (frontRight.isBusy() && frontLeft.isBusy()){
+
+        }
+
+        frontRight.setVelocity(0);
+        frontLeft.setVelocity(0);
+        backLeft.setVelocity(0);
+        backRight.setVelocity(0);
+
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
     }
 
     public void strafeLeft (int distanceInches){

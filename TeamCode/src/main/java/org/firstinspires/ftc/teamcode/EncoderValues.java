@@ -14,18 +14,22 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 @TeleOp(name="Encoder Values")
 public class EncoderValues extends OpMode {
 
-    DcMotor frontRight;
+
+    DcMotorEx frontRight;
+    DcMotorEx frontLeft;
     DcMotorEx intakeArm;
 
 @Override
     public void init() {
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
+        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
 
     }
 @Override
     public void loop() {
-        telemetry.addData("Intake Motor encoder value", intakeArm.getCurrentPosition());
+        telemetry.addData("front right", frontRight.getCurrentPosition());
+        telemetry.addData("front left", frontLeft.getCurrentPosition());
         telemetry.update();
 //830
     //668
@@ -35,9 +39,16 @@ public class EncoderValues extends OpMode {
     //166
         if (gamepad1.a) {
             frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             telemetry.addData("Encoder reset", "True");
             sleep(1000);
         }
+        if(gamepad1.b){
+            frontRight.setPower(0.01);
+            frontLeft.setPower(0.01);
+
+        }
+
     }
 
 }
