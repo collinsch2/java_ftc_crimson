@@ -31,8 +31,11 @@ public class AutoRedWH extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         encoders.hardwareMap(hardwareMap);
         waitForStart();
-
-        encoders.diagonalUpRight(10);
+        encoders.backward(35);
+        encoders.turnLeft(15);
+        encoders.arm2();
+        encoders.outtake(1000);
+       /* encoders.diagonalUpRight(10);
         encoders.diagonaldownLeft(10);
         encoders.diagonalUpLeft(10);
         encoders.diagonaldownRight(10);
@@ -137,7 +140,7 @@ public class AutoRedWH extends LinearOpMode {
         telemetry.addData("Run", "Completed");
         telemetry.update();
 */
+
+
     }
-
-
-
+}
