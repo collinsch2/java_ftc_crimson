@@ -209,10 +209,6 @@ public class RobotEncoded2 {
         backLeft.setVelocity(0);
         backRight.setVelocity(0);
 
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void turnRight (int distanceInches){
@@ -238,10 +234,6 @@ public class RobotEncoded2 {
         backLeft.setVelocity(0);
         backRight.setVelocity(0);
 
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void turnLeft (int distanceInches){
@@ -267,10 +259,6 @@ public class RobotEncoded2 {
         backLeft.setVelocity(0);
         backRight.setVelocity(0);
 
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void diagonalUpLeft(int distanceInches){
