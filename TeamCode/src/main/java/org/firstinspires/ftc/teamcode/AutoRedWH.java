@@ -10,15 +10,8 @@ public class AutoRedWH extends LinearOpMode {
     Robot robot = new Robot();
     RobotEncoded2 encoders = new RobotEncoded2();
 
-    @Override
-    public void runOpMode() throws InterruptedException {
-        encoders.hardwareMap(hardwareMap);
-        waitForStart();
-
-
-        encoders.backward(10);
-
-        while (opModeIsActive()) {
+    /*public void telemetry(){
+        while (encoders.frontLeft.isBusy() && encoders.frontRight.isBusy() && encoders.backLeft.isBusy() && encoders.backRight.isBusy()) {
             telemetry.addData("Front right", encoders.frontRight.getCurrentPosition());
             telemetry.addData("Front left", encoders.frontLeft.getCurrentPosition());
             telemetry.addData("back left", encoders.backLeft.getCurrentPosition());
@@ -30,8 +23,21 @@ public class AutoRedWH extends LinearOpMode {
             telemetry.addData("back right velocity", encoders.backRight.getVelocity());
             telemetry.update();
         }
+    }
 
-        encoders.stop();
+     */
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+        encoders.hardwareMap(hardwareMap);
+        waitForStart();
+
+        encoders.diagonalUpRight(10);
+        encoders.diagonaldownLeft(10);
+        encoders.diagonalUpLeft(10);
+        encoders.diagonaldownRight(10);
+        encoders.carouselBlue(5000);
+        encoders.carouselRed(5000);
     }
         /*robot.turnRight(0.5);
         sleep(600);
