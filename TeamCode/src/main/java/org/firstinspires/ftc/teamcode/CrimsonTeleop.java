@@ -30,8 +30,8 @@ public class CrimsonTeleop extends OpMode {
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
-        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override

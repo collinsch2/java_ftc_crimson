@@ -10,6 +10,15 @@ import static android.os.SystemClock.sleep;
 
 public class RobotEncoded2 {
 
+
+
+    final double driveVelocity = 1000;
+    final double turnVelocity = 250;
+    final int armVelocity = 1500;
+    final double intakePower = 0.9;
+    final double outtakePower = -0.5;
+    final double carouselPower = 1;
+
     DcMotorEx frontLeft;
     DcMotorEx frontRight;
     DcMotorEx backLeft;
@@ -17,13 +26,6 @@ public class RobotEncoded2 {
     DcMotor carouselMotor;
     DcMotorEx intakeArm;
     DcMotorEx intakeMotor;
-
-    final double driveVelocity = 500;
-    final double turnVelocity = 250;
-    final int armVelocity = 1500;
-    final double intakePower = 0.9;
-    final double outtakePower = -0.5;
-    final double carouselPower = 1;
 
     final double     TICKS_PER_MOTOR_ROTATION    = 537.7 ;
     final double     GEAR_REDUCTION    = 1;
@@ -47,8 +49,8 @@ public class RobotEncoded2 {
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void arm0(){
@@ -71,7 +73,7 @@ public class RobotEncoded2 {
     }
 
     public void arm2(){
-        intakeArm.setTargetPosition(-342);
+        intakeArm.setTargetPosition(-350);
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);
 

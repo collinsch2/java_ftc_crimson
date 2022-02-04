@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@Autonomous(name = "RedWAREHOUSE")
+@Autonomous(name = "blueWAREHOUSEfrieghtandpark")
 public class AutoRedWH extends LinearOpMode {
     Robot robot = new Robot();
     RobotEncoded2 encoders = new RobotEncoded2();
@@ -31,10 +31,27 @@ public class AutoRedWH extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         encoders.hardwareMap(hardwareMap);
         waitForStart();
-        encoders.backward(35);
-        encoders.turnLeft(15);
-        encoders.arm2();
-        encoders.outtake(1000);
+
+        encoders.arm3();
+        encoders.forward(37);
+        encoders.turnRight(16);
+        encoders.outtake(2000);
+        encoders.arm1();
+        encoders.arm0();
+        encoders.turnRight(31);
+        encoders.strafeLeft(44);
+        encoders.forward(50);
+        encoders.intake(1500);
+        encoders.arm3();
+        encoders.backward(62);
+        encoders.turnRight(16);
+        encoders.forward(21);
+        encoders.outtake (2000);
+
+        encoders.turnLeft(17);
+        encoders.strafeLeft(22);
+        encoders.forward(62);
+        encoders.strafeRight(12);
        /* encoders.diagonalUpRight(10);
         encoders.diagonaldownLeft(10);
         encoders.diagonalUpLeft(10);
