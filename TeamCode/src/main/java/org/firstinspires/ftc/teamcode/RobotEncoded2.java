@@ -15,8 +15,8 @@ public class RobotEncoded2 {
     final double driveVelocity = 1000;
     final double turnVelocity = 250;
     final int armVelocity = 1500;
-    final double intakePower = 0.9;
-    final double outtakePower = -0.5;
+    final double intakePower = 0.8;
+    final double outtakePower = -0.7;
     final double carouselPower = 1;
 
     DcMotorEx frontLeft;
@@ -73,7 +73,7 @@ public class RobotEncoded2 {
     }
 
     public void arm2(){
-        intakeArm.setTargetPosition(-350);
+        intakeArm.setTargetPosition(-360);
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);
 
