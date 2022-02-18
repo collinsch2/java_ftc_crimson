@@ -30,7 +30,7 @@ public class CrimsonTeleop extends OpMode {
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE); //reverse the right side so that they move counter-clockwise
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
@@ -46,6 +46,7 @@ public class CrimsonTeleop extends OpMode {
         if (gamepad1.right_bumper) {
             drivePower = 0.25;
         }
+
         else {
             drivePower = 0.5;
         }
@@ -153,6 +154,7 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
         }
+
         if(gamepad2.dpad_up){ // up
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 20);
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
