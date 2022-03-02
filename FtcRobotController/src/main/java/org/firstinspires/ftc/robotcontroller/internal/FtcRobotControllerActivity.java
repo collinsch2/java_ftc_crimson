@@ -61,6 +61,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.google.blocks.ftcrobotcontroller.ProgrammingWebHandlers;
 import com.google.blocks.ftcrobotcontroller.runtime.BlocksOpMode;
 import com.qualcomm.ftccommon.ClassManagerFactory;
@@ -333,6 +334,9 @@ public class FtcRobotControllerActivity extends Activity
         popupMenu.inflate(R.menu.ftc_robot_controller);
         AnnotatedHooksClassFilter.getInstance().callOnCreateMenuMethods(
             FtcRobotControllerActivity.this, popupMenu.getMenu());
+        // what do these two lines above do?
+        FtcDashboard.populateMenu(FtcRobotControllerActivity.this, popupMenu.getMenu());
+        //maybe these two lines do same thing
         popupMenu.show();
       }
     });
@@ -410,6 +414,8 @@ public class FtcRobotControllerActivity extends Activity
     checkPreferredChannel();
 
     AnnotatedHooksClassFilter.getInstance().callOnCreateMethods(this);
+    FtcDashboard.start(this);
+    //maybe same?
   }
 
   protected UpdateUI createUpdateUI() {
@@ -483,6 +489,8 @@ public class FtcRobotControllerActivity extends Activity
     RobotLog.cancelWriteLogcatToDisk();
 
     AnnotatedHooksClassFilter.getInstance().callOnDestroyMethods(this);
+    FtcDashboard.stop(this);
+    //maybe same?
   }
 
   protected void bindToService() {
@@ -539,6 +547,8 @@ public class FtcRobotControllerActivity extends Activity
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.ftc_robot_controller, menu);
     AnnotatedHooksClassFilter.getInstance().callOnCreateMenuMethods(this, menu);
+    FtcDashboard.populateMenu(this, menu);
+    //maybe same?
     return true;
   }
 
@@ -707,6 +717,8 @@ public class FtcRobotControllerActivity extends Activity
 
     AnnotatedHooksClassFilter.getInstance().callWebHandlerRegistrarMethods(this,
         service.getWebServer().getWebHandlerManager());
+    FtcDashboard.attachWebServer(this, service.getWebServer().getWebHandlerManager());
+    //maybe same?
   }
 
   private void updateUIAndRequestRobotSetup() {
@@ -753,6 +765,8 @@ public class FtcRobotControllerActivity extends Activity
     AndroidBoard.showErrorIfUnknownControlHub();
 
     AnnotatedHooksClassFilter.getInstance().callOnCreateEventLoopMethods(this, eventLoop);
+    FtcDashboard.attachEventLoop(this, eventLoop);
+    //maybe these do the same thing
   }
 
   protected OpModeRegister createOpModeRegister() {

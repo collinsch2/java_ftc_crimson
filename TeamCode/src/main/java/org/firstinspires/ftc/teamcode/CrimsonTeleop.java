@@ -149,6 +149,20 @@ telemetry.addData("arm is" , intakeArm.getCurrentPosition());
 
         }
 
+        if(gamepad2.right_stick_y > 0.3){ // up
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 40);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+        }
+
+        if(gamepad2.right_stick_y < -0.3){ // up
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 40);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
+        }
+
+
+
         if(gamepad2.left_stick_y > 0.3){ // up
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 20);
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
