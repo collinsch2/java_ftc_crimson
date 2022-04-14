@@ -2,12 +2,10 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @Autonomous(name = "TESTING Red")
 public class AutoRedWH3 extends LinearOpMode {
-    RobotEncoded2 encoders = new RobotEncoded2();
+    RobotEncoded encoders = new RobotEncoded();
     @Override
     public void runOpMode() throws InterruptedException {
         encoders.hardwareMap(hardwareMap);

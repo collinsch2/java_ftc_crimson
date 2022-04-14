@@ -11,7 +11,6 @@ import com.acmerobotics.roadrunner.util.NanoClock;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -52,7 +51,6 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 @Autonomous(group = "drive")
 public class DriveVelocityPIDTuner extends LinearOpMode {
     public static double DISTANCE = 72; // in
-    ElapsedTime runtime = new ElapsedTime();
 
     enum Mode {
         DRIVER_MODE,
@@ -167,7 +165,6 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
             }
 
             telemetry.update();
-
         }
     }
 }
