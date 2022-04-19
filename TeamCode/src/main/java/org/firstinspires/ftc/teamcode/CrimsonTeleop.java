@@ -21,10 +21,10 @@ public class CrimsonTeleop extends OpMode {
     DcMotor carouselMotor;
     DcMotorEx intakeArm;
     DcMotorEx intakeMotor;
-    CRServo sideServo;
-    CRServo upServo;
+    //CRServo sideServo;
+    //CRServo upServo;
     ColorSensor colorsensor;
-    Servo intakeServo;
+    //Servo intakeServo;
 
     double sidePosition = 0.894;
     double servoPosition = 0.696;
@@ -42,17 +42,18 @@ public class CrimsonTeleop extends OpMode {
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
+
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
-        sideServo = hardwareMap.get(CRServo.class, "sideServo");
-        upServo = hardwareMap.get(CRServo.class, "upServo");
-        intakeServo = hardwareMap.get(Servo.class, "intakeServo");
+        //sideServo = hardwareMap.get(CRServo.class, "sideServo");
+        //upServo = hardwareMap.get(CRServo.class, "upServo");
+        //intakeServo = hardwareMap.get(Servo.class, "intakeServo");
+
         //colorsensor = hardwareMap.get(ColorSensor.class, "colorsensor");
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-
     }
 
     @Override
@@ -178,7 +179,7 @@ public class CrimsonTeleop extends OpMode {
         }
 
 
-        if(gamepad2.dpad_down){
+        /*if(gamepad2.dpad_down){
         upServo.setPower(servoPower);
         }
 
@@ -199,6 +200,8 @@ public class CrimsonTeleop extends OpMode {
         else {
             sideServo.setPower(0);
         }
+
+         */
 
         if (gamepad1.b) {//red
             carouselMotor.setPower(carouselPower);
@@ -233,8 +236,8 @@ public class CrimsonTeleop extends OpMode {
 
         telemetry.addData("Up servo = value =", servoPosition);
         telemetry.addData("side servo value = ", sidePosition);
-        telemetry.addData("Up servo position = ", upServo.getPower());
-        telemetry.addData("side servo power = ", sideServo.getPower());
+       // telemetry.addData("Up servo position = ", upServo.getPower());
+        //telemetry.addData("side servo power = ", sideServo.getPower());
 
         telemetry.update();
 
