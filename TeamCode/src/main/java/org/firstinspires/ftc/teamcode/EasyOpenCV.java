@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -11,18 +13,18 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 @Autonomous(name = "camera")
 public class EasyOpenCV extends LinearOpMode {
-    Pipeline pipeline = new Pipeline();
-    private String position;
+    Pipeline pipeline = new Pipeline(telemetry);
 
     @Override
     public void runOpMode() throws InterruptedException {
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        OpenCvCamera camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "webcam"), cameraMonitorViewId);
 
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        OpenCvCamera webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "webcam"), cameraMonitorViewId);
+
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                camera.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
+                webcam.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
@@ -32,18 +34,24 @@ public class EasyOpenCV extends LinearOpMode {
             }
         });
 
-        camera.setPipeline(pipeline);
-
-        while(!isStarted()){
-            position = pipeline.position;
-            telemetry.addData("Object is ", position);
-        }
-
-
+        webcam.setPipeline(pipeline);
         waitForStart();
-        while (opModeIsActive()) {
-            telemetry.addData("camera is ", "on");
-            telemetry.update();
+
+//        encoders.hardwareMap(hardwareMap);
+
+
+//        switch (pipeline2.getLocation()){
+//            case LEFT:
+//                encoders.arm1();
+//                break;
+//            case CENTER:
+//                encoders.arm2();
+//                break;
+//            case RIGHT:
+//                encoders.arm3();
+//                break;
+//        }
+
         }
     }
-}
+

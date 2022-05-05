@@ -1,11 +1,14 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import static android.os.SystemClock.sleep;
 
 public class RobotEncoded {
@@ -16,6 +19,8 @@ public class RobotEncoded {
     final double intakePower = 0.8;
     final double outtakePower = -0.7;
     final double carouselPower = 1;
+    final double degreesPerInch = 5.294;
+
 
     DcMotorEx frontLeft;
     DcMotorEx frontRight;
@@ -24,7 +29,10 @@ public class RobotEncoded {
     DcMotor carouselMotor;
     DcMotorEx intakeArm;
     DcMotorEx intakeMotor;
+    Servo cappingArm;
+    CRServo cappingClaw;
 
+    double restingPos = 0.468;
     final double     TICKS_PER_MOTOR_ROTATION    = 537.7 ;
     final double     GEAR_REDUCTION    = 1;
     final double     WHEEL_DIAMETER_INCHES   = 3.77953;
@@ -49,10 +57,17 @@ public class RobotEncoded {
 
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        cappingArm = hardwareMap.get(Servo.class, "cappingArm");
+        cappingClaw = hardwareMap.get(CRServo.class, "cappingClaw");
+    }
+
+    public void cappingArmRest(){
+        cappingArm.setPosition(restingPos);
     }
 
     public void arm0(){
-        intakeArm.setTargetPosition(-80);
+        intakeArm.setTargetPosition(50);
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(1000);
 
@@ -62,7 +77,8 @@ public class RobotEncoded {
     }
 
     public void arm1(){
-        intakeArm.setTargetPosition(-168);
+        intakeArm.setTargetPosition(210);
+        //-168
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);
 
@@ -71,7 +87,8 @@ public class RobotEncoded {
     }
 
     public void arm2(){
-        intakeArm.setTargetPosition(-360);
+        intakeArm.setTargetPosition(370);
+        //-360
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);
 
@@ -80,7 +97,8 @@ public class RobotEncoded {
     }
 
     public void arm3(){
-        intakeArm.setTargetPosition(-590);
+        intakeArm.setTargetPosition(500);
+        //-590
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);
 
@@ -211,7 +229,8 @@ public class RobotEncoded {
 
     }
 
-    public void turnRight (int distanceInches){
+    public void turnRight (int degrees){
+        int distanceInches = (int)(degrees/degreesPerInch);
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() +(int)(distanceInches*TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() +(int)(-distanceInches*TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() +(int)(-distanceInches*TICKS_PER_INCH));
@@ -236,7 +255,8 @@ public class RobotEncoded {
 
     }
 
-    public void turnLeft (int distanceInches){
+    public void turnLeft (int degrees){
+        int distanceInches = (int)(degrees/degreesPerInch);
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() +(int)(-distanceInches*TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() +(int)(distanceInches*TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() +(int)(distanceInches*TICKS_PER_INCH));

@@ -20,21 +20,21 @@ public class CrimsonTeleop extends OpMode {
     DcMotor backRight;
     DcMotor carouselMotor;
     DcMotorEx intakeArm;
-    DcMotorEx intakeMotor;
-    //CRServo sideServo;
-    //CRServo upServo;
-    ColorSensor colorsensor;
-    //Servo intakeServo;
+    ColorSensor colorSensor;
+    DcMotor intakeMotor;
+    Servo cappingArm;
+    CRServo cappingClaw;
 
-    double sidePosition = 0.894;
-    double servoPosition = 0.696;
-    //0.25 straight up
-    //0.6 horizontal
-    double servoPower = 0.2;
-    double armVelocity = 1500;
+
+    double armVelocity = 2000;
     double drivePower;
     double carouselPower = 1;
-    double intakeServoPosition = 0;
+
+
+    double restingPos = 0.468;
+    double startingPos = 0.217;
+    double grabPos = 0.897;
+    double cappingPos = 0.6;
 
     @Override
     public void init() {
@@ -46,14 +46,13 @@ public class CrimsonTeleop extends OpMode {
         carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
         intakeArm = hardwareMap.get(DcMotorEx.class, "intakeArm");
-        //sideServo = hardwareMap.get(CRServo.class, "sideServo");
-        //upServo = hardwareMap.get(CRServo.class, "upServo");
-        //intakeServo = hardwareMap.get(Servo.class, "intakeServo");
-
-        //colorsensor = hardwareMap.get(ColorSensor.class, "colorsensor");
+        cappingArm = hardwareMap.get(Servo.class, "cappingArm");
+        cappingClaw = hardwareMap.get(CRServo.class, "cappingClaw");
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
 
     @Override
@@ -69,7 +68,7 @@ public class CrimsonTeleop extends OpMode {
         }
 
         else {
-            drivePower = 0.7;
+            drivePower = 0.65;
         }
 
         frontLeft.setPower((yPower + xPower + rx) * drivePower);
@@ -77,8 +76,11 @@ public class CrimsonTeleop extends OpMode {
         backLeft.setPower((yPower - xPower + rx) * drivePower);
         backRight.setPower((yPower + xPower - rx) * drivePower);
 
+        //fourth value: 182
+
         if (gamepad2.x) { //default
-            intakeArm.setTargetPosition(-80);
+            intakeArm.setTargetPosition(45);
+            //48
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(1000);
 
@@ -90,18 +92,12 @@ public class CrimsonTeleop extends OpMode {
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
                 backRight.setPower((yPower + xPower - rx) * drivePower);
-
-                telemetry.addData("Status", "Waiting for motor");
-                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
-                telemetry.addData("Motor velocity at", intakeArm.getVelocity());
-                telemetry.addData("Motor power at", intakeArm.getPower());
-                telemetry.update();
-
         }
 
-        if (gamepad2.y) { //level 1
-            intakeArm.setTargetPosition(-168);
-            //-70
+        if (gamepad2.y) { //Shared shipping hub
+            intakeArm.setTargetPosition(170);
+            //94 LEvel 1
+            //170
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
@@ -113,18 +109,12 @@ public class CrimsonTeleop extends OpMode {
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
                 backRight.setPower((yPower + xPower - rx) * drivePower);
-
-                telemetry.addData("Status", "Waiting for motor");
-                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
-                telemetry.addData("Motor velocity at", intakeArm.getVelocity());
-                telemetry.addData("Motor power at", intakeArm.getPower());
-                telemetry.update();
 
         }
 
         if (gamepad2.b) {// level 2
-            intakeArm.setTargetPosition(-342);
-            //-120
+            intakeArm.setTargetPosition(357);
+            //245
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
@@ -136,16 +126,12 @@ public class CrimsonTeleop extends OpMode {
                 frontRight.setPower((yPower - xPower - rx) * drivePower);
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
                 backRight.setPower((yPower + xPower - rx) * drivePower);
-
-                telemetry.addData("Status", "Waiting for motor");
-                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
-                telemetry.update();
 
         }
 
         if (gamepad2.a) {// level 3
-            intakeArm.setTargetPosition(-590);
-            //-590
+            intakeArm.setTargetPosition(507);
+            //500
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
 
@@ -158,58 +144,31 @@ public class CrimsonTeleop extends OpMode {
                 backLeft.setPower((yPower - xPower + rx) * drivePower);
                 backRight.setPower((yPower + xPower - rx) * drivePower);
 
-                telemetry.addData("Status", "Waiting for motor");
-                telemetry.addData("Motor at", intakeArm.getCurrentPosition());
-                telemetry.update();
 
         }
 
 
 
         if(gamepad2.left_stick_y < -0.3){ // up
-            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 20);
-            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            intakeArm.setVelocity(armVelocity);
-        }
-
-        if(gamepad2.left_stick_y > 0.3){ // down
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 20);
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
         }
 
-
-        /*if(gamepad2.dpad_down){
-        upServo.setPower(servoPower);
+        if(gamepad2.left_stick_y > 0.3){ // down
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 20);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setVelocity(armVelocity);
         }
 
-        else if(gamepad2.dpad_up){
-        upServo.setPower(-servoPower);
-        }
-
-        else {
-            upServo.setPower (0);
-        }
-
-        if(gamepad2.dpad_left){
-           sideServo.setPower(-servoPower);
-        }
-        else if(gamepad2.dpad_right){
-            sideServo.setPower(servoPower);
-        }
-        else {
-            sideServo.setPower(0);
-        }
-
-         */
 
         if (gamepad1.b) {//red
-            carouselMotor.setPower(carouselPower);
+            carouselMotor.setPower(-carouselPower);
             telemetry.addData("Carousel moving clockwise", "true");
             telemetry.update();
         }
         else if (gamepad1.x) {//blue
-            carouselMotor.setPower(-carouselPower);
+            carouselMotor.setPower(carouselPower);
             telemetry.addData("Carousel moving counter-clockwise", "true");
             telemetry.update();
         } else {
@@ -219,33 +178,70 @@ public class CrimsonTeleop extends OpMode {
         }
 
         if (gamepad2.right_trigger > 0.3) {
-            intakeMotor.setPower(1.0);
+            intakeMotor.setPower(0.9);
             telemetry.addData("Intake moving inwards", "true");
             telemetry.update();
         }
         else if (gamepad2.left_trigger > 0.3) {
-            intakeMotor.setPower(-1.0);
+            intakeMotor.setPower(-0.5);
             telemetry.addData("Intake moving outwards", "true");
             telemetry.update();
         } else {
             intakeMotor.setPower(0);
-            telemetry.addData("Intake stopped", "t  rue");
+            telemetry.addData("Intake stopped", "true");
             telemetry.update();
         }
 
+        if(gamepad2.dpad_up){
+            cappingArm.setPosition(cappingPos);
+        }
+        else if (gamepad2.dpad_down){
+            cappingArm.setPosition(grabPos);
+        }
 
-        telemetry.addData("Up servo = value =", servoPosition);
-        telemetry.addData("side servo value = ", sidePosition);
-       // telemetry.addData("Up servo position = ", upServo.getPower());
-        //telemetry.addData("side servo power = ", sideServo.getPower());
+        if(gamepad2.start){
+            cappingArm.setPosition(restingPos);
+        }
+        else if(gamepad2.back){
+            cappingArm.setPosition(startingPos);
+        }
+
+
+        if(gamepad2.dpad_left){
+            cappingArm.setPosition(cappingArm.getPosition() + 0.01);
+        }
+        else if(gamepad2.dpad_right){
+            cappingArm.setPosition(cappingArm.getPosition() - 0.01);
+        }
+
+        if(gamepad2.right_bumper){
+            cappingClaw.setPower(-0.5);
+
+        }
+        else if (gamepad2.left_bumper){
+            cappingClaw.setPower(0.5);
+        }
+        else{
+            cappingClaw.setPower(0);
+        }
+
+
+        if(colorSensor.red() > 400){
+            carouselMotor.setPower(0.1);
+        }
+
+        telemetry.addData("Red = ", colorSensor.red());
+        telemetry.addData("Green = ", colorSensor.green());
+        telemetry.addData("Blue = ", colorSensor.blue());
+        telemetry.addData("ARGB = ", colorSensor.argb());
+        telemetry.addData("Alpha/light = ", colorSensor.alpha());
+        telemetry.addData("capping arm ", cappingArm.getPosition());
+
+        telemetry.addData("Motor at", intakeArm.getCurrentPosition());
+        telemetry.addData("Motor velocity at", intakeArm.getVelocity());
 
         telemetry.update();
-
-        //telemetry.addData("Red =", colorsensor.red());
-        //telemetry.addData("Green =", colorsensor.green());
-        //telemetry.addData("Blue =", colorsensor.blue());
-
-
-
+//open: 0.51
+        //
     }
 }
