@@ -61,14 +61,14 @@ public class CrimsonTeleop extends OpMode {
         //Mecanum wheel movement
         double yPower = -gamepad1.left_stick_y;
         double xPower = gamepad1.left_stick_x;
-        double rx = gamepad1.right_stick_x;
+        double rx = gamepad1.right_stick_x*0.90;
 
         if (gamepad1.right_bumper) {
             drivePower = 0.25;
         }
 
         else {
-            drivePower = 0.65;
+            drivePower = 0.62;
         }
 
         frontLeft.setPower((yPower + xPower + rx) * drivePower);
@@ -130,7 +130,7 @@ public class CrimsonTeleop extends OpMode {
         }
 
         if (gamepad2.a) {// level 3
-            intakeArm.setTargetPosition(507);
+            intakeArm.setTargetPosition(547);
             //500
             intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             intakeArm.setVelocity(armVelocity);
@@ -227,7 +227,7 @@ public class CrimsonTeleop extends OpMode {
 
 
         if(colorSensor.red() > 400){
-            carouselMotor.setPower(0.1);
+            carouselMotor.setPower(0.2);
         }
 
         telemetry.addData("Red = ", colorSensor.red());
@@ -243,5 +243,7 @@ public class CrimsonTeleop extends OpMode {
         telemetry.update();
 //open: 0.51
         //
+
+
     }
 }

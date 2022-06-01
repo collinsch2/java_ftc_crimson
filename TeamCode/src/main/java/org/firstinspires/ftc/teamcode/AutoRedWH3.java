@@ -8,7 +8,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name = "TESTING Red")
+@Autonomous(name = "RedWH JAWN")
 public class AutoRedWH3 extends LinearOpMode {
     RobotEncoded robot = new RobotEncoded();
     Pipeline pipeline = new Pipeline(telemetry);
@@ -31,8 +31,9 @@ public class AutoRedWH3 extends LinearOpMode {
                 telemetry.update();
             }
         });
-
+        webcam.setPipeline(pipeline);
         waitForStart();
+        robot.cappingArmRest();
 
         switch (pipeline.getLocation()){
             case LEFT:
@@ -44,41 +45,26 @@ public class AutoRedWH3 extends LinearOpMode {
             case RIGHT:
                 robot.arm3();
                 break;
-            case NOTHING:
-                break;
         }
+        robot.cappingArmStart();
+        robot.strafeLeft(21);
+        robot.forward(21);
+        robot.outtake(2000);
+        robot.turnLeft(91);
+        robot.arm0();
+        robot.strafeLeft(27);
+        robot.backward(62);
+        robot.stop();
 
-        robot.turnLeft(0);
-        robot.forward(0);
-        robot.outtake(0);
-        robot.backward(0);
-        robot.turnRight(0);
-        robot.strafeRight(0);
-        robot.forward(0);
+//        robot.forward(2);
+//        robot.turnLeft(35);
+//        robot.forward(24);
+//        robot.outtake(0);
+//        robot.backward(0);
+//        robot.turnRight(0);
+//        robot.strafeRight(0);
+//        robot.forward(0);
 
-
-//        encoders.arm2();
-//        encoders.forward(37);
-//        encoders.turnLeft(16);
-//        encoders.outtake(1000);
-//        encoders.turnLeft(30);
-//        encoders.arm0();
-//        encoders.strafeRight(52);
-//        encoders.forward(52);
-//
-//        encoders.intake(1500);
-//        encoders.backward(5);
-//        encoders.strafeRight(8);
-//        encoders.arm2();
-//        encoders.backward(69);
-//        encoders.turnRight(16);
-//        encoders.forward(13);
-//        encoders.outtake (2000);
-//
-//        encoders.turnRight(14);
-//        encoders.strafeRight(28);
-//        encoders.forward(70);
-//        encoders.strafeLeft(12);
 
 
     }

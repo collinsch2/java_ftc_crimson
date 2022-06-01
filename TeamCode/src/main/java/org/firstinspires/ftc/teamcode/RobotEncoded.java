@@ -13,12 +13,13 @@ import static android.os.SystemClock.sleep;
 
 public class RobotEncoded {
 
-    final double driveVelocity = 1000;
+    final double driveVelocity = 700;
     final double turnVelocity = 250;
     final int armVelocity = 1500;
     final double intakePower = 0.8;
-    final double outtakePower = -0.7;
-    final double carouselPower = 1;
+    final double outtakePower = -0.4;
+    final double carouselPower = 0.7;
+    //initially 1, but was going too fast for auto
     final double degreesPerInch = 5.294;
 
 
@@ -33,6 +34,10 @@ public class RobotEncoded {
     CRServo cappingClaw;
 
     double restingPos = 0.468;
+    double startingPos = 0.217;
+    double grabPos = 0.897;
+    double cappingPos = 0.6;
+
     final double     TICKS_PER_MOTOR_ROTATION    = 537.7 ;
     final double     GEAR_REDUCTION    = 1;
     final double     WHEEL_DIAMETER_INCHES   = 3.77953;
@@ -65,9 +70,10 @@ public class RobotEncoded {
     public void cappingArmRest(){
         cappingArm.setPosition(restingPos);
     }
+    public void cappingArmStart(){cappingArm.setPosition(startingPos);}
 
     public void arm0(){
-        intakeArm.setTargetPosition(50);
+        intakeArm.setTargetPosition(45);
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(1000);
 
@@ -77,7 +83,7 @@ public class RobotEncoded {
     }
 
     public void arm1(){
-        intakeArm.setTargetPosition(210);
+        intakeArm.setTargetPosition(205);
         //-168
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);
@@ -87,7 +93,7 @@ public class RobotEncoded {
     }
 
     public void arm2(){
-        intakeArm.setTargetPosition(370);
+        intakeArm.setTargetPosition(377);
         //-360
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);
@@ -97,7 +103,7 @@ public class RobotEncoded {
     }
 
     public void arm3(){
-        intakeArm.setTargetPosition(500);
+        intakeArm.setTargetPosition(570);
         //-590
         intakeArm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         intakeArm.setVelocity(armVelocity);

@@ -9,10 +9,10 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name = "TESTING Blue")
+@Autonomous(name = "BlueWH JAWN")
 public class AutoBlueWH3 extends LinearOpMode {
     RobotEncoded robot = new RobotEncoded();
-    Pipeline pipeline = new Pipeline(telemetry);
+    Pipeline2 pipeline = new Pipeline2(telemetry);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -46,18 +46,16 @@ public class AutoBlueWH3 extends LinearOpMode {
             case RIGHT:
                 robot.arm3();
                 break;
-            case NOTHING:
-                break;
         }
-
-        robot.turnRight(45);
-        robot.forward(0);
-        robot.outtake(0);
-        robot.backward(0);
-        robot.turnLeft(0);
-        robot.strafeLeft(0);
-        robot.forward(0);
-
+        robot.cappingArmStart();
+        robot.strafeRight(25);
+        robot.forward(21);
+        robot.outtake(2000);
+        robot.turnLeft(87);
+        robot.arm0();
+        robot.strafeLeft(28);
+        robot.forward(62);
+        robot.stop();
 
 //        encoders.strafeRight(31);
 //        encoders.forward(20);

@@ -79,7 +79,7 @@ public class CrimVuforia extends LinearOpMode
             // Send telemetry and idle to let hardware catch up
             telemetry.update();
             idle();
-/*
+
             if (wheelListener.IsVisible) {
                 robot.move(-50, 50, 0);
                 while (robotY < 700) {
@@ -152,7 +152,7 @@ public class CrimVuforia extends LinearOpMode
         parameters.cameraName = webcamName;
         parameters.useExtendedTracking = false;
         vuforiaLocalizer = ClassFactory.createVuforiaLocalizer(parameters);
-        /*VuforiaLocalizer myVuforia = ClassFactory.getInstance().createVuforia(parameters);
+        VuforiaLocalizer myVuforia = ClassFactory.getInstance().createVuforia(parameters);
 
         // These are the vision targets that we want to use
         // The string needs to be the name of the appropriate .xml file in the assets folder
@@ -209,6 +209,5 @@ public class CrimVuforia extends LinearOpMode
 
 
 }
+*/
 
-
- */

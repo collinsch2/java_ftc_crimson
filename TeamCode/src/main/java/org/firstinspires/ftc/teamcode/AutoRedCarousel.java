@@ -14,13 +14,10 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 
-@Autonomous(name = "RedCAROUSEL")
+@Autonomous(name = "RedCAROUSEL JAWN")
 public class AutoRedCarousel extends LinearOpMode {
     RobotEncoded robot = new RobotEncoded();
     Pipeline pipeline = new Pipeline(telemetry);
-
-    int turn90 = 17;
-    final double degreesPerInch = 5.294;
 
     @Override
     public void runOpMode() throws NullPointerException {
@@ -40,6 +37,7 @@ public class AutoRedCarousel extends LinearOpMode {
                 telemetry.update();
             }
         });
+        webcam.setPipeline(pipeline);
         waitForStart();
         robot.cappingArmRest();
 
@@ -53,13 +51,38 @@ public class AutoRedCarousel extends LinearOpMode {
             case RIGHT:
                 robot.arm3();
                 break;
-            case NOTHING:
-                break;
-        }
+            }
 
-        robot.turnRight(0);
-        robot.forward(0);
-        robot.outtake(0);
+        robot.cappingArmStart();
+        robot.turnRight(30);
+        robot.forward(27);
+        robot.outtake(2500);
+        robot.backward(27);
+        robot.arm0();
+        robot.turnLeft(85);
+        robot.forward(21);
+        robot.strafeLeft(13);
+        robot.carouselRed(3000);
+        robot.strafeRight(24);
+        robot.turnLeft(40);
+        robot.forward(15);
+        robot.strafeRight(8);
+
+
+//        robot.turnRight(45);
+//        robot.forward(15);
+//        robot.strafeLeft(16);
+//        robot.strafeLeft(15);
+
+
+//        robot.turnLeft(35);
+//        robot.backward(2);
+//        robot.forward(10);
+//        robot.strafeLeft(16);
+//        robot.turnLeft(45);
+//        robot.strafeLeft(14);
+//        robot.backward(2);
+//        robot.turnLeft(20);
 
 
 

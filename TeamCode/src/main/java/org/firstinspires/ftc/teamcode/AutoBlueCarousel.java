@@ -8,10 +8,10 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name = "BlueCAROUSEL")
+@Autonomous(name = "BlueCAROUSEL JAWN")
 public class AutoBlueCarousel extends LinearOpMode {
     RobotEncoded robot = new RobotEncoded();
-    Pipeline pipeline = new Pipeline(telemetry);
+    Pipeline2 pipeline = new Pipeline2(telemetry);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -31,7 +31,7 @@ public class AutoBlueCarousel extends LinearOpMode {
                 telemetry.update();
             }
         });
-
+        webcam.setPipeline(pipeline);
         waitForStart();
 
         robot.cappingArmRest();
@@ -46,9 +46,25 @@ public class AutoBlueCarousel extends LinearOpMode {
             case RIGHT:
                 robot.arm3();
                 break;
-            case NOTHING:
-                break;
         }
+        
+        robot.cappingArmStart();
+        robot.turnLeft(35);
+        robot.forward(26);
+        robot.outtake(2500);
+        robot.backward(26);
+        robot.arm0();
+        robot.turnRight(95);
+        robot.forward(21);
+        robot.turnRight(180);
+        robot.strafeLeft(16);
+        robot.carouselBlue(3000);
+        robot.strafeRight(24);
+        robot.turnLeft(220);
+        //fix after this line
+        robot.forward(13);
+
+
 
 //        robot.forward(42);
 //        robot.turnLeft(17);
